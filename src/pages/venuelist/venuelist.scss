@@ -17,4 +17,17 @@ page-venuelist {
                 }
         }
     }
+
+    .no-list{
+        color: #757575;
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+        height: 80%;
+        flex-direction: column;
+
+        ion-icon {
+            font-size: 100px;
+        }
+    }
 }

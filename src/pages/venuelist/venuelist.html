@@ -26,4 +26,10 @@
       <h3>{{ venue.menu_sub_list.join(', ') }}</h3>
     </ion-item>
   </ion-list>
+
+  <div class="no-list" text-center *ngIf="venueList.length == 0">
+    <ion-icon name="ios-warning-outline"></ion-icon>
+    <h5>No Venues Found</h5>
+    <p>There are no venues listed in your area yet...</p>
+  </div>
 </ion-content>
