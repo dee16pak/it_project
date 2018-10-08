@@ -9,7 +9,7 @@
     </ion-buttons>
   </ion-navbar>
 </ion-header>
-
+ios-arrow-round-down
 
 <ion-content no-padding>
   <ion-list *ngIf="orderList.length > 0" no-padding>
@@ -19,10 +19,30 @@
     </ion-item>
 
     <ion-item *ngFor="let order of orderList">
-      <div style="width: 30%;display: inline-block">{{ order.name }}</div>
-      <div style="width: 35%;font-size:11px;display: inline-block">{{order.sub_name}}</div>
-      <div style="width:8%;display: inline-block">{{order.qty}}</div>
-      <div style="text-align: right;width:20%;display: inline-block"><b>{{order.price * order.qty}}</b></div>
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            {{ order.name }}
+          </ion-col>
+          <ion-col style="font-size:11px;">
+            {{order.sub_name}} </ion-col>
+          <ion-col col-4>
+              <button ion-button icon-only (click)="sub(order)" small>
+                <ion-icon name="md-remove"></ion-icon>
+              </button>
+            {{order.qty}}            <button ion-button icon-only (click)="add(order)" small>
+                <ion-icon name="md-add"></ion-icon>
+              </button>
+           </ion-col>
+          <ion-col style="text-align: right;" col-2>{{order.price * order.qty}}
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
+      <!-- <div style="width: 30%;display: inline-block"></div>
+      <div style="width: 35%;font-size:11px;display: inline-block"></div>
+      <div style="width:8%;display: inline-block"></div>
+      <div style="text-align: right;width:20%;display: inline-block"><b>{{order.price * order.qty}}</b></div> -->
     </ion-item>
 
     <ion-item>
