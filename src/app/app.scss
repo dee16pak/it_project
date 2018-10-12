@@ -14,3 +14,22 @@
 // To declare rules for a specific mode, create a child rule
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
+.modal-fullscreen {
+    @media not all and (min-height: 600px) and (min-width: 768px){
+        ion-backdrop {
+            visibility: visible!important;
+        } 
+    }
+   
+    .modal-wrapper {
+        position: relative;
+        top: 40%;
+        left: 0;
+        display: block;
+        width: 100%;
+        height: 60%;
+        border-top-left-radius: 15px;
+        border-top-right-radius: 15px;
+        backface-visibility: hidden;
+    }
+}
