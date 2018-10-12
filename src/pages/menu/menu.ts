@@ -19,17 +19,14 @@ export class MenuPage {
   myData = [];
   
   
-  // shownGroup = null;
+  
   constructor(public modalCtrl: ModalController, public navCtrl: NavController, public navParams: NavParams, private cart: CartdataproviderProvider) {
 
    
 
   }
-  // isGroupShown(group) {
-  //   return this.shownGroup === group;
-  // }
+ 
   toggleGroup(j) {
-
     if (this.cart.groups[j].check == true) {
       this.cart.groups[j].check = false;
     }
@@ -39,23 +36,11 @@ export class MenuPage {
 
 
   add_quantity(j, i) {
-    // this.myData = this.cart.groups[j].items[i];
-    // console.log(this.cart.groups[j].items[i]);
-
     this.cart.pos.i=j;
     this.cart.pos.j=i;
     const modal: Modal = this.modalCtrl.create(MenuModalPage, { data: this.cart.pos },{ cssClass: "modal-fullscreen" });
 
     modal.present();
-    // modal.onDidDismiss((data) => {
-    //   if(data!=null){
-    //     this.cart.groups[j].items[i] = data;
-    //     this.cart.list[this.cart.list.length]={
-    //       menuindex:j,
-    //       itemindex:i
-    //     }
-    //   }
-    // })
   }
 
   ionViewDidLoad() {

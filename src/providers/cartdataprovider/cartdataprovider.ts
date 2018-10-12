@@ -23,7 +23,9 @@ export class CartdataproviderProvider {
       for (var j = 0; j < 3; j++) {
         this.groups[i].items[j] = {
           itemno: j,
-          quantity: 0
+          quantity: 0,
+          price:1,
+          submenu:0
         }
 
       }

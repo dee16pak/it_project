@@ -22,7 +22,6 @@ export class MenuModalPage {
   }
 
   addtocart(){
-      // this.data.quantity=this.data1.quantity1;
       this.cart.groups[this.cart.pos.i].items[this.cart.pos.j].quantity = this.data.quantity;
       this.cart.list[this.cart.list.length] ={
         i:this.cart.pos.i,
@@ -37,9 +36,6 @@ export class MenuModalPage {
   }
  
   ionViewDidLoad() {
-    //this.pos = this.navParams.get('data');
-    // this.data1.quantity1=this.data.quantity;
-    // this.data1.itemno1=this.data.itemno;
     this.itemno = this.cart.groups[this.cart.pos.i].items[this.cart.pos.j].itemno;
     this.data.quantity = this.cart.groups[this.cart.pos.i].items[this.cart.pos.j].quantity;
   }
