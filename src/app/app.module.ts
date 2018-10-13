@@ -7,9 +7,12 @@ import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
 import { CheckoutPage } from '../pages/checkout/checkout';
 import { CartdataproviderProvider } from '../providers/cartdataprovider/cartdataprovider';
+import { VenuelistPage } from '../pages/venuelist/venuelist';
 
+import { Geolocation } from '@ionic-native/geolocation';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { LocationProvider } from '../providers/location/location';
 
 import { MenuPage } from '../pages/menu/menu';
 import {MenuModalPage} from '../pages/menu-modal/menu-modal'
@@ -21,7 +24,8 @@ import {MenuModalPage} from '../pages/menu-modal/menu-modal'
     ListPage,
     MenuPage,
     MenuModalPage,
-    CheckoutPage
+    CheckoutPage,
+    VenuelistPage
   ],
   imports: [
     BrowserModule,
@@ -34,13 +38,16 @@ import {MenuModalPage} from '../pages/menu-modal/menu-modal'
     ListPage,
     MenuPage,
     MenuModalPage,
-    CheckoutPage
+    CheckoutPage,
+    VenuelistPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
     CartdataproviderProvider,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
+    Geolocation,
+    LocationProvider
   ]
 })
 export class AppModule {}
