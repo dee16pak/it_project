@@ -8,13 +8,13 @@ export class CartdataproviderProvider {
   groups = [];
   list = [];
   pos = {
-    i:-1,
-    j:-1
+    i:0,
+    j:0
   }
   checkt=false;
   constructor() {
     console.log('Hello CartdataproviderProvider Provider');
-    for (var i = 0; i < 10; i++) {
+    for (var i = 0; i < 1; i++) {
       this.groups[i] = {
         name: i,
         check: false,
@@ -23,10 +23,11 @@ export class CartdataproviderProvider {
       };
       for (var j = 0; j < 3; j++) {
         this.groups[i].items[j] = {
+          itemid: j,  
           itemno: j,
-          quantity: 0,
-          price:1,
-          submenu:0
+          quantity: 3,
+          price:10,
+          submenu:"sub mane"
         }
 
       }

@@ -1,0 +1,70 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Cart</ion-title>
+    <ion-buttons end>
+      <button ion-button clear><ion-icon ios="ios-cart" md="md-cart" large></ion-icon>
+        <!--TODO Change cart icon-->
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+ios-arrow-round-down
+
+<ion-content no-padding>
+
+  <ion-list *ngIf="orderList.length > 0" no-padding>
+
+    <ion-item text-center class="first-item">
+      Cart Summary
+    </ion-item>
+
+    <ion-item *ngFor="let order of orderList">
+      <ion-grid no-padding>
+        <ion-row justify-content-start align-items-center>
+          <ion-col col-7>
+            {{ order.itemname }} &nbsp;&nbsp;<span style="font-size:11px;">( {{order.submenu}}
+              )</span>
+          </ion-col>
+          <ion-col col-3>
+            <button ion-button icon-only (click)="sub(order)" color="danger" small clear>
+              <ion-icon name="md-remove"></ion-icon>
+            </button>
+            {{order.quantity}}
+            <button ion-button icon-only (click)="add(order)" color="secondary" small clear>
+              <ion-icon name="md-add"></ion-icon>
+            </button>
+
+          </ion-col>
+          <ion-col style="text-align: right;" col-2>{{order.price * order.quantity}}
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
+      <!-- <div style="width: 30%;display: inline-block"></div>
+      <div style="width: 35%;font-size:11px;display: inline-block"></div>
+      <div style="width:8%;display: inline-block"></div>
+      <div style="text-align: right;width:20%;display: inline-block"><b>{{order.price * order.qty}}</b></div> -->
+    </ion-item>
+
+    <ion-item>
+      <div style="font-size:20px; float: left;">Total</div>
+      <div style="text-align: right;font-size:20px ;float: right"><b>{{ total }}</b></div>
+
+    </ion-item>
+    <ion-item>
+      <!-- <div style="height:40px"></div> -->
+    </ion-item>
+  </ion-list>
+  <ion-footer no-shadow class="fixed-bottom" no-padding style="margin:0px;">
+    <ion-toolbar position="bottom" no-padding style="margin:0px;"><button style="margin:0px;height: 48px;" ion-button
+        icon-only (click)="finish(this.total)" color="secondary" full>
+        Checkout<ion-icon name="ios-send-outline"></ion-icon>
+      </button></ion-toolbar>
+  </ion-footer>
+  <div class="no-list" text-center *ngIf="orderList.length == 0">
+    <ion-icon name="ios-warning-outline"></ion-icon>
+    <h5>No Item added to Cart</h5>
+    <p>There are no </p>
+  </div>
+
+</ion-content>

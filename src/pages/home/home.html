@@ -3,7 +3,13 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
+    
     <ion-title>Home</ion-title>
+    <ion-buttons end>
+      <button ion-button clear (click)="gotoCheckout()">
+        <ion-icon ios="ios-cart" md="md-cart" large ></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 

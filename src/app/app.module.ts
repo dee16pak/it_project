@@ -5,13 +5,14 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
+import { CheckoutPage } from '../pages/checkout/checkout';
+import { CartdataproviderProvider } from '../providers/cartdataprovider/cartdataprovider';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { MenuPage } from '../pages/menu/menu';
 import {MenuModalPage} from '../pages/menu-modal/menu-modal'
-import { CartdataproviderProvider } from '../providers/cartdataprovider/cartdataprovider';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { CartdataproviderProvider } from '../providers/cartdataprovider/cartdata
     HomePage,
     ListPage,
     MenuPage,
-    MenuModalPage
+    MenuModalPage,
+    CheckoutPage
   ],
   imports: [
     BrowserModule,
@@ -31,13 +33,14 @@ import { CartdataproviderProvider } from '../providers/cartdataprovider/cartdata
     HomePage,
     ListPage,
     MenuPage,
-    MenuModalPage
+    MenuModalPage,
+    CheckoutPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler},
     CartdataproviderProvider,
+    {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
 export class AppModule {}
