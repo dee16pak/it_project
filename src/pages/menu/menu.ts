@@ -22,6 +22,7 @@ export class MenuPage {
   
   constructor(public modalCtrl: ModalController, public navCtrl: NavController, public navParams: NavParams, private cart: CartdataproviderProvider) {
 
+    
    
 
   }
@@ -38,7 +39,7 @@ export class MenuPage {
   add_quantity(j, i) {
     this.cart.pos.i=j;
     this.cart.pos.j=i;
-    const modal: Modal = this.modalCtrl.create(MenuModalPage, { data: this.cart.pos },{ cssClass: "modal-fullscreen" });
+    const modal: Modal = this.modalCtrl.create(MenuModalPage,{ cssClass: "modal-fullscreen" });
 
     modal.present();
   }
@@ -46,6 +47,9 @@ export class MenuPage {
   ionViewDidLoad() {
 
     console.log('ionViewDidLoad MenuPage');
+  }
+  checkout(){
+    console.log("checkout");
   }
 
 }

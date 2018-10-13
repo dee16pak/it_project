@@ -23,10 +23,24 @@ export class MenuModalPage {
 
   addtocart(){
       this.cart.groups[this.cart.pos.i].items[this.cart.pos.j].quantity = this.data.quantity;
-      this.cart.list[this.cart.list.length] ={
-        i:this.cart.pos.i,
-        j:this.cart.pos.j
-      } 
+      
+      if(this.data.quantity>0 && this.cart.list.indexOf(this.cart.pos)<0){
+        this.cart.list[this.cart.list.length] ={
+          i:this.cart.pos.i,
+          j:this.cart.pos.j
+        }
+      }
+      else if(this.data.quantity=0 && this.cart.list.indexOf(this.cart.pos)>=0){
+            this.cart.list.splice(this.cart.list.indexOf(this.cart.pos),1);
+      }
+      if(this.cart.list.length>0){
+        this.cart.checkt=true;
+      }
+      else{
+        this.cart.checkt=false;
+      }
+      console.log("length",this.cart.list.length);
+      console.log(this.cart.list);
   }
   closeModal(){
     console.log("close");

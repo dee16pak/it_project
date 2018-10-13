@@ -11,6 +11,7 @@ export class CartdataproviderProvider {
     i:0,
     j:0
   }
+  checkt=false;
   constructor() {
     console.log('Hello CartdataproviderProvider Provider');
     for (var i = 0; i < 10; i++) {
