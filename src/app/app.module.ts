@@ -9,11 +9,17 @@ import { ListPage } from '../pages/list/list';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
+import { MenuPage } from '../pages/menu/menu';
+import {MenuModalPage} from '../pages/menu-modal/menu-modal'
+import { CartdataproviderProvider } from '../providers/cartdataprovider/cartdataprovider';
+
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
-    ListPage
+    ListPage,
+    MenuPage,
+    MenuModalPage
   ],
   imports: [
     BrowserModule,
@@ -23,12 +29,15 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   entryComponents: [
     MyApp,
     HomePage,
-    ListPage
+    ListPage,
+    MenuPage,
+    MenuModalPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    CartdataproviderProvider,
   ]
 })
 export class AppModule {}
