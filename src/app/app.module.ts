@@ -6,6 +6,8 @@ import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
 import { CheckoutPage } from '../pages/checkout/checkout';
+import { CartdataproviderProvider } from '../providers/cartdataprovider/cartdataprovider';
+
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
@@ -30,6 +32,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   providers: [
     StatusBar,
     SplashScreen,
+    CartdataproviderProvider,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

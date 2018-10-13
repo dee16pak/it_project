@@ -22,23 +22,20 @@ ios-arrow-round-down
       <ion-grid no-padding>
         <ion-row justify-content-start align-items-center>
           <ion-col col-7>
-            {{ order.name }} &nbsp;&nbsp;<span style="font-size:11px;">( {{order.sub_name}}
+            {{ order.itemname }} &nbsp;&nbsp;<span style="font-size:11px;">( {{order.submenu}}
               )</span>
           </ion-col>
-
-
-
           <ion-col col-3>
             <button ion-button icon-only (click)="sub(order)" color="danger" small clear>
               <ion-icon name="md-remove"></ion-icon>
             </button>
-            {{order.qty}}
+            {{order.quantity}}
             <button ion-button icon-only (click)="add(order)" color="secondary" small clear>
               <ion-icon name="md-add"></ion-icon>
             </button>
 
           </ion-col>
-          <ion-col style="text-align: right;" col-2>{{order.price * order.qty}}
+          <ion-col style="text-align: right;" col-2>{{order.price * order.quantity}}
           </ion-col>
         </ion-row>
       </ion-grid>
