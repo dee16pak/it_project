@@ -22,7 +22,8 @@ export class MenuModalPage {
   }
 
   addtocart(){
-      this.cart.groups[this.cart.pos.i].items[this.cart.pos.j].quantity = this.data.quantity;
+    
+    this.cart.groups[this.cart.pos.i].items[this.cart.pos.j].quantity = this.data.quantity;
 
       this.cart.checkempty();
   }
@@ -39,6 +40,7 @@ export class MenuModalPage {
   }
 
   add(){
+    
     this.data.quantity = this.data.quantity + 1;
   }
 

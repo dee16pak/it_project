@@ -45,7 +45,7 @@ import {MenuModalPage} from '../pages/menu-modal/menu-modal'
     StatusBar,
     SplashScreen,
     CartdataproviderProvider,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
     Geolocation,
     LocationProvider
   ]

@@ -16,14 +16,18 @@ export class CartdataproviderProvider {
     console.log('Hello CartdataproviderProvider Provider');
     for (var i = 0; i < 1; i++) {
       this.groups[i] = {
-        name: i,
+        //gid
+        name: i,//remove
+        //groupname
         check: false,
         items: [],
 
       };
       for (var j = 0; j < 3; j++) {
         this.groups[i].items[j] = {
-          itemid: j,  
+         //itemid
+          itemid: j, 
+          //item name 
           itemno: j,
           quantity: 3,
           price:10,
@@ -33,10 +37,11 @@ export class CartdataproviderProvider {
       }
 
     }
-    console.log("hi");
+   // console.log("hi");
     console.log(this.groups[0].name);
   }
 
+  
   checkempty(){
      let p,q;
      this.checkt=false;

@@ -28,8 +28,15 @@ export class CheckoutPage {
     for (let i = 0; i < this.orderList.length; i++) {
       if (this.orderList[i].itemid == order.itemid) {
       if(this.orderList[i].quantity-1>0){
-        this.cart.groups[order.name].items[order.itemid] = this.orderList[i].quantity - 1;
-        this.orderList[i].quantity = this.orderList[i].quantity - 1;
+
+        for(let j = 0;j<this.cart.groups[this.orderList[i].name].items.length;j++){
+          if(this.cart.groups[this.orderList[i].name].items[j].itemid==order.itemid){
+            this.cart.groups[this.orderList[i].name].items[j].quantity -= 1 
+          }
+        }
+       // this.orderList[i].quantity = this.orderList[i].quantity - 1;
+        this.orderListCal();
+        
         this.totalcal();
       }
       else{
@@ -58,8 +65,12 @@ export class CheckoutPage {
           text: 'Yes',
           handler: () => {
             console.log('yes clicked');
-            this.cart.groups[order.name].items[order.itemid] = this.orderList[i].quantity - 1;
-            this.orderList[i].quantity = this.orderList[i].quantity - 1;
+            for(let j = 0;j<this.cart.groups[this.orderList[i].name].items.length;j++){
+              if(this.cart.groups[this.orderList[i].name].items[j].itemid==order.itemid){
+                this.cart.groups[this.orderList[i].name].items[j].quantity -= 1 
+              }
+            }
+            //this.orderList[i].quantity = this.orderList[i].quantity - 1;
             //delete this.orderList[i];
             this.orderListCal();
             this.totalcal();  
@@ -75,8 +86,16 @@ export class CheckoutPage {
     console.log(order.itemname,order.name);
     for (let i = 0; i < this.orderList.length; i++) {
       if (this.orderList[i].itemid == order.itemid) {
-        this.cart.groups[order.name].items[order.itemid] = this.orderList[i].quantity +1;
-        this.orderList[i].quantity = this.orderList[i].quantity + 1;
+       
+        for(let j = 0;j<this.cart.groups[this.orderList[i].name].items.length;j++){
+          if(this.cart.groups[this.orderList[i].name].items[j].itemid==order.itemid){
+            this.cart.groups[this.orderList[i].name].items[j].quantity += 1 
+          }
+          
+        }
+        this.orderListCal();
+         //call add fuction;
+        //this.orderList[i].quantity = this.orderList[i].quantity + 1;
         this.totalcal();
       }
 
