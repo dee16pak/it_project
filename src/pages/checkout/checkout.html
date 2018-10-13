@@ -2,8 +2,7 @@
   <ion-navbar>
     <ion-title>Cart</ion-title>
     <ion-buttons end>
-      <button ion-button icon-only>
-        <ion-icon name="ios-cart"></ion-icon>
+      <button ion-button clear><ion-icon ios="ios-cart" md="md-cart" large></ion-icon>
         <!--TODO Change cart icon-->
       </button>
     </ion-buttons>
@@ -12,6 +11,7 @@
 ios-arrow-round-down
 
 <ion-content no-padding>
+
   <ion-list *ngIf="orderList.length > 0" no-padding>
 
     <ion-item text-center class="first-item">
@@ -19,21 +19,25 @@ ios-arrow-round-down
     </ion-item>
 
     <ion-item *ngFor="let order of orderList">
-      <ion-grid>
-        <ion-row>
-          <ion-col>
-            {{ order.name }}
+      <ion-grid no-padding>
+        <ion-row justify-content-start align-items-center>
+          <ion-col col-7>
+            {{ order.name }} &nbsp;&nbsp;<span style="font-size:11px;">( {{order.sub_name}}
+              )</span>
           </ion-col>
-          <ion-col style="font-size:11px;">
-            {{order.sub_name}} </ion-col>
-          <ion-col col-4>
-              <button ion-button icon-only (click)="sub(order)" small>
-                <ion-icon name="md-remove"></ion-icon>
-              </button>
-            {{order.qty}}            <button ion-button icon-only (click)="add(order)" small>
-                <ion-icon name="md-add"></ion-icon>
-              </button>
-           </ion-col>
+
+
+
+          <ion-col col-3>
+            <button ion-button icon-only (click)="sub(order)" color="danger" small clear>
+              <ion-icon name="md-remove"></ion-icon>
+            </button>
+            {{order.qty}}
+            <button ion-button icon-only (click)="add(order)" color="secondary" small clear>
+              <ion-icon name="md-add"></ion-icon>
+            </button>
+
+          </ion-col>
           <ion-col style="text-align: right;" col-2>{{order.price * order.qty}}
           </ion-col>
         </ion-row>
@@ -50,10 +54,20 @@ ios-arrow-round-down
       <div style="text-align: right;font-size:20px ;float: right"><b>{{ total }}</b></div>
 
     </ion-item>
+    <ion-item>
+      <!-- <div style="height:40px"></div> -->
+    </ion-item>
   </ion-list>
+  <ion-footer no-shadow class="fixed-bottom" no-padding style="margin:0px;">
+    <ion-toolbar position="bottom" no-padding style="margin:0px;"><button style="margin:0px;height: 48px;" ion-button
+        icon-only (click)="finish(this.total)" color="secondary" full>
+        Checkout<ion-icon name="ios-send-outline"></ion-icon>
+      </button></ion-toolbar>
+  </ion-footer>
   <div class="no-list" text-center *ngIf="orderList.length == 0">
     <ion-icon name="ios-warning-outline"></ion-icon>
     <h5>No Item added to Cart</h5>
     <p>There are no </p>
   </div>
+
 </ion-content>
