@@ -8,8 +8,8 @@ export class CartdataproviderProvider {
   groups = [];
   list = [];
   pos = {
-    i:0,
-    j:0
+    i:-1,
+    j:-1
   }
   checkt=false;
   constructor() {
@@ -34,6 +34,22 @@ export class CartdataproviderProvider {
     }
     console.log("hi");
     console.log(this.groups[0].name);
+  }
+
+  checkempty(){
+     let p,q;
+     this.checkt=false;
+     for(p in this.groups){
+         for(q in this.groups[p].items){
+           if(this.groups[p].items[q].quantity > 0){
+             this.checkt=true;
+             break;
+           }
+         }
+         if(this.checkt==true){
+           break;
+         }
+     }
   }
 
 }

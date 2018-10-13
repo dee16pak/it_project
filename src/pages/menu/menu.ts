@@ -27,19 +27,19 @@ export class MenuPage {
 
   }
  
-  toggleGroup(j) {
-    if (this.cart.groups[j].check == true) {
-      this.cart.groups[j].check = false;
+  toggleGroup(i) {
+    if (this.cart.groups[i].check == true) {
+      this.cart.groups[i].check = false;
     }
     else
-      this.cart.groups[j].check = true;
+      this.cart.groups[i].check = true;
   }
 
 
-  add_quantity(j, i) {
-    this.cart.pos.i=j;
-    this.cart.pos.j=i;
-    const modal: Modal = this.modalCtrl.create(MenuModalPage,{ cssClass: "modal-fullscreen" });
+  add_quantity(i, j) {
+    this.cart.pos.i=i;
+    this.cart.pos.j=j;
+    const modal: Modal = this.modalCtrl.create(MenuModalPage,0,{ cssClass: "modal-fullscreen" });
 
     modal.present();
   }

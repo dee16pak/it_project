@@ -23,29 +23,13 @@ export class MenuModalPage {
 
   addtocart(){
       this.cart.groups[this.cart.pos.i].items[this.cart.pos.j].quantity = this.data.quantity;
-      
-      if(this.data.quantity>0 && this.cart.list.indexOf(this.cart.pos)<0){
-        this.cart.list[this.cart.list.length] ={
-          i:this.cart.pos.i,
-          j:this.cart.pos.j
-        }
-      }
-      else if(this.data.quantity=0 && this.cart.list.indexOf(this.cart.pos)>=0){
-            this.cart.list.splice(this.cart.list.indexOf(this.cart.pos),1);
-      }
-      if(this.cart.list.length>0){
-        this.cart.checkt=true;
-      }
-      else{
-        this.cart.checkt=false;
-      }
-      console.log("length",this.cart.list.length);
-      console.log(this.cart.list);
+
+      this.cart.checkempty();
   }
   closeModal(){
     console.log("close");
-    this.cart.pos.i=0;
-    this.cart.pos.j=0;
+    this.cart.pos.i=-1;
+    this.cart.pos.j=-1;
     this.view.dismiss();
   }
  
@@ -53,13 +37,15 @@ export class MenuModalPage {
     this.itemno = this.cart.groups[this.cart.pos.i].items[this.cart.pos.j].itemno;
     this.data.quantity = this.cart.groups[this.cart.pos.i].items[this.cart.pos.j].quantity;
   }
+
   add(){
     this.data.quantity = this.data.quantity + 1;
   }
+
   subtract(){
-    if(this.data.quantity>0){
+    if(this.data.quantity > 0){
       this.data.quantity = this.data.quantity - 1;
     }
   }
-  
+
 }
