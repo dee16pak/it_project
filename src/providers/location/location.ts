@@ -9,8 +9,8 @@ import { Platform } from 'ionic-angular';
 */
 @Injectable()
 export class LocationProvider {
-  private lat: any;
-  private long: any;
+  private lat: number;
+  private long: number;
   constructor(private platform: Platform, public geolocation: Geolocation) {}
 
   private refreshLocation() {
@@ -28,10 +28,10 @@ export class LocationProvider {
   }
 
   private _get() {
-    return new Promise(resolve => resolve({
+    return {
       lat: this.lat,
       long: this.long
-    }));
+    }
   }
 
   get() {

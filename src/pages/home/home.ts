@@ -23,11 +23,12 @@ export class HomePage {
   
   ionViewDidLoad() {
     console.log(this.platform)
-    this.location.refreshAndGet()
-      .then(loc => {
-        this.lat = loc.lat;
-        this.long = loc.long;
-      })
+      this.location.refreshAndGet()
+        .then(loc => {
+          console.log(loc);
+          this.lat = loc.lat;
+          this.long = loc.long;
+        })
   }
 
 
