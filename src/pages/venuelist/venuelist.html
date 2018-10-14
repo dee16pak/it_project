@@ -5,16 +5,19 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-
   <ion-navbar>
     <ion-title>Available Venues</ion-title>
+    <ion-buttons end>
+      <button ion-button clear (click)="refreshAndGetShit()">
+        <ion-icon class="refresh-btn-top" name="refresh"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
-
 </ion-header>
 
 
 <ion-content no-padding>
-  <ion-list *ngIf="venueList.length > 0">
+  <ion-list *ngIf="!showError && !showLoading && venueList.length > 0">
     <ion-item text-center class="first-item">
       {{ venueList.length || 'No' }} Options Available
     </ion-item>
@@ -27,9 +30,15 @@
     </ion-item>
   </ion-list>
 
-  <div class="no-list" text-center *ngIf="venueList.length == 0">
+  <div class="no-list" text-center *ngIf="!showError && !showLoading && venueList.length == 0">
     <ion-icon name="ios-warning-outline"></ion-icon>
     <h5>No Venues Found</h5>
     <p>There are no venues listed in your area yet...</p>
   </div>
+
+  <div class="no-list" text-center *ngIf="!showLoading && showError">
+      <ion-icon name="ios-warning-outline"></ion-icon>
+      <h5>Error</h5>
+      <p>{{ errorMsg }}</p>
+    </div>
 </ion-content>

@@ -18,7 +18,8 @@ export class LocationProvider {
     if(this.platform.is('core')) {//Dummy value for debugging on desktop browser.
       this.lat = 23;
       this.long = 54;
-      await new Promise(resolve => setTimeout(() => {resolve()}, 3000));
+      //await new Promise((resolve, reject) => setTimeout(reject, 2000));
+      await new Promise(resolve => setTimeout(resolve, 2000));      
     } else {
       const resp = await this.geolocation.getCurrentPosition();
       this.lat = resp.coords.latitude;
@@ -34,15 +35,23 @@ export class LocationProvider {
   }
 
   async get() {
-    if(this.lat === undefined) {
-      return await this.refreshAndGet()
+    try {
+      if(this.lat === undefined) {
+        return await this.refreshAndGet()
+      }
+      return await this._get();
+    } catch(err) {
+      throw new Error(err);
     }
-    return await this._get();
   }
 
   async refreshAndGet() {
-    await this.refreshLocation();
-    return await this._get();
+    try {
+      await this.refreshLocation();
+      return await this._get();
+    } catch(err) {
+      throw new Error(err);
+    }
   }
 
 }
