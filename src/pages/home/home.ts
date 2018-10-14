@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
-import { Platform } from 'ionic-angular';
 
 import { MenuPage } from '../menu/menu';
 import { CheckoutPage } from '../checkout/checkout';
@@ -14,28 +13,23 @@ import { LocationProvider } from '../../providers/location/location';
 export class HomePage {
   lat:any = undefined;
   long:any = undefined;
-  constructor(public navCtrl: NavController, public location: LocationProvider,private platform: Platform) {
+  constructor(public navCtrl: NavController, public location: LocationProvider) {}
 
-  }
-   open() {
+  open() {
     this.navCtrl.push(MenuPage);
   }
   
-  ionViewDidLoad() {
-    console.log(this.platform)
-      this.location.refreshAndGet()
-        .then(loc => {
-          this.lat = loc['lat'];
-          this.long = loc['long'];
-        })
+  async ionViewDidLoad() {
+    const loc = await this.location.get();
+    this.lat = loc.lat;
+    this.long = loc.long;
   }
-
 
   gotoCheckout(){
     this.navCtrl.push(CheckoutPage);
   }
+
   gotoVenuelist(){
     this.navCtrl.push(VenuelistPage);
   }
-
 }

@@ -11,40 +11,38 @@ import { Platform } from 'ionic-angular';
 export class LocationProvider {
   private lat: number;
   private long: number;
+
   constructor(private platform: Platform, public geolocation: Geolocation) {}
 
-  private refreshLocation() {
+  private async refreshLocation() {
     if(this.platform.is('core')) {//Dummy value for debugging on desktop browser.
       this.lat = 23;
       this.long = 54;
-      return new Promise(resolve => setTimeout(() => resolve(), 3000));
-    }
-
-    return this.geolocation.getCurrentPosition().then(resp => {
+      await new Promise(resolve => setTimeout(() => {resolve()}, 3000));
+    } else {
+      const resp = await this.geolocation.getCurrentPosition();
       this.lat = resp.coords.latitude;
       this.long = resp.coords.longitude;
-      return new Promise((resolve) => resolve());
-    });
+    }
   }
 
-  private _get() {
-    return new Promise(resolve => resolve({
+  private async _get() {
+    return {
       lat: this.lat,
       long: this.long
-    }));
+    };
   }
 
-  get() {
+  async get() {
     if(this.lat === undefined) {
-      return this.refreshAndGet()
+      return await this.refreshAndGet()
     }
-    return this._get();
+    return await this._get();
   }
 
-  refreshAndGet() {
-    return this.refreshLocation().then(() => {
-      return this._get();
-    });
+  async refreshAndGet() {
+    await this.refreshLocation();
+    return await this._get();
   }
 
 }
