@@ -25,9 +25,8 @@ export class HomePage {
     console.log(this.platform)
       this.location.refreshAndGet()
         .then(loc => {
-          console.log(loc);
-          this.lat = loc.lat;
-          this.long = loc.long;
+          this.lat = loc['lat'];
+          this.long = loc['long'];
         })
   }
 
