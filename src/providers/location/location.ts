@@ -28,10 +28,10 @@ export class LocationProvider {
   }
 
   private _get() {
-    return {
+    return new Promise(resolve => resolve({
       lat: this.lat,
       long: this.long
-    }
+    }));
   }
 
   get() {
