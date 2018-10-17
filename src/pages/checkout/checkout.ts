@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { CartdataproviderProvider } from '../../providers/cartdataprovider/cartdataprovider';
 import { AlertController } from 'ionic-angular';
+import { PayPal, PayPalPayment, PayPalConfiguration,  PayPalPaymentDetails} from '@ionic-native/paypal';
+
 
 @IonicPage()
 @Component({
@@ -11,11 +13,36 @@ import { AlertController } from 'ionic-angular';
 export class CheckoutPage {
   orderList: any[] = [];
   total: any;
-  constructor(public navCtrl: NavController, public navParams: NavParams,private cart: CartdataproviderProvider,private alertCtrl: AlertController) {
+  constructor(private payPal: PayPal, public navCtrl: NavController, public navParams: NavParams,private cart: CartdataproviderProvider,private alertCtrl: AlertController) {
      this.orderList = [
      ];
     this.total = 0.0;
   }
+
+  checkout(){
+    this.payPal.init({
+        PayPalEnvironmentProduction: '',
+        PayPalEnvironmentSandbox: 'AZ2vWTozIVbMe1X6I_5buKMzNXlY4coHegGEUP4bGfNXXhTG2KC-QZkzZxjq7mwjB3gGjLs-CvufSqeF'
+    }).then(() => {
+      this.payPal.prepareToRender('PayPalEnvironmentSandbox', new PayPalConfiguration({
+        acceptCreditCards: true,
+        languageOrLocale: 'en-GB',
+        merchantName: '',
+        merchantPrivacyPolicyURL: '',
+        merchantUserAgreementURL: ''
+      })).then(() => {
+        let detail = new PayPalPaymentDetails('19.99', '0.00', '0.00');
+        let payment = new PayPalPayment('19.99', 'USD', 'name of restro', 'Sale', detail);
+        this.payPal.renderSinglePaymentUI(payment).then((response) => {
+          console.log('pagamento efetuado')
+        }, () => {
+          console.log('erro ao renderizar o pagamento do paypal');
+        })
+      })
+    })
+  }
+
+
   totalcal() {
     this.total = 0.0;
     for (let i = 0; i < this.orderList.length; i++) {

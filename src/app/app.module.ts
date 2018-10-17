@@ -13,6 +13,7 @@ import { Geolocation } from '@ionic-native/geolocation';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { LocationProvider } from '../providers/location/location';
+import { PayPal } from '@ionic-native/paypal'
 
 import { MenuPage } from '../pages/menu/menu';
 import {MenuModalPage} from '../pages/menu-modal/menu-modal'
@@ -47,7 +48,8 @@ import {MenuModalPage} from '../pages/menu-modal/menu-modal'
     CartdataproviderProvider,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     Geolocation,
-    LocationProvider
+    LocationProvider,
+    PayPal
   ]
 })
 export class AppModule {}
