@@ -12,6 +12,7 @@ import { VenuelistPage } from '../pages/venuelist/venuelist';
 import { Geolocation } from '@ionic-native/geolocation';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { HttpClientModule } from '@angular/common/http';
 import { LocationProvider } from '../providers/location/location';
 
 import { MenuPage } from '../pages/menu/menu';
@@ -29,6 +30,7 @@ import {MenuModalPage} from '../pages/menu-modal/menu-modal'
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     IonicModule.forRoot(MyApp),
   ],
   bootstrap: [IonicApp],
@@ -45,9 +47,9 @@ import {MenuModalPage} from '../pages/menu-modal/menu-modal'
     StatusBar,
     SplashScreen,
     CartdataproviderProvider,
-    {provide: ErrorHandler, useClass: IonicErrorHandler},
     Geolocation,
-    LocationProvider
+    LocationProvider,
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
   ]
 })
 export class AppModule {}

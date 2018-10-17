@@ -1,4 +1,7 @@
 page-venuelist {
+    .refresh-btn-top{
+        font-size: 25px;
+    }
     .first-item {
         max-height: 18px;
         background-color:#F5F5F5;
@@ -7,14 +10,14 @@ page-venuelist {
         color: #757575;
 
         .input-wrapper {
-                padding: 0px;
+            padding: 0px;
 
-                .label {
-                    max-height: 18px;
-                    padding-bottom: 1px;
-                    padding-top: 1px;
-                    margin: 0;
-                }
+            .label {
+                max-height: 18px;
+                padding-bottom: 1px;
+                padding-top: 1px;
+                margin: 0;
+            }
         }
     }
 

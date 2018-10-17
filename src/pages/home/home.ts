@@ -20,7 +20,12 @@ export class HomePage {
   }
   
   async ionViewDidLoad() {
-    const loc = await this.location.get();
+    let loc;
+    try {
+      loc = await this.location.refreshAndGet();
+    } catch(err) {
+      return;
+    }
     this.lat = loc.lat;
     this.long = loc.long;
   }

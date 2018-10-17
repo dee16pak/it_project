@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, LoadingController } from 'ionic-angular';
+import { LocationProvider } from '../../providers/location/location';
+import { ENV } from '../../env';
+import { HttpClient } from '@angular/common/http';
 
 /**
  * Generated class for the VenuelistPage page.
@@ -14,17 +17,69 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'venuelist.html',
 })
 export class VenuelistPage {
-
   venueList: any[] = [];
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-    this.venueList = [
-      {name : 'Dominos', menu_sub_list: ['Pizza', 'Desserts', 'Italian', 'Burgers'], thumbnail: 'assets/imgs/logo.png'},
-      {name : 'Dominos', menu_sub_list: ['Pizza', 'Desserts', 'Italian', 'Burgers'], thumbnail: 'assets/imgs/logo.png'}
-    ];
-  }
+  showLoading: boolean = false;
+  showError: boolean = false;
+  errorMsg: string = '';
+  constructor(public navCtrl: NavController, public loadingCtrl: LoadingController, public http: HttpClient, public locProd: LocationProvider) {}
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad VenuelistPage');
+    this.refreshAndGetShit();
+  }
+
+  async refreshAndGetShit() {
+    this.showError = false;
+    this.showLoading = true;
+    let loading = this.showLoader('Fetching your Location');
+
+    let loc;
+    try {
+      loc = await this.locProd.refreshAndGet();
+    } catch(err) {
+      this.error('Error while getting your Location.', loading);
+      return;
+    }
+
+    loading.dismiss();
+    loading = this.showLoader('Fetching Venues near your Location');
+
+    let list;
+    try {
+      list = await this.getVenueNearLocation(loc);
+    } catch(err) {
+      this.error('Error while getting Venuelist', loading);
+      return;
+    }
+
+    loading.dismiss();
+    setTimeout(() => {
+      if(list) this.venueList = list;
+      this.showLoading = false;
+    }, 1000);
+  }
+
+  private error(errMsg, loading) {
+    this.showError = true;
+    this.errorMsg = errMsg;
+    loading.dismiss();
+    setTimeout(() => {
+      this.showLoading = false;
+    }, 1000);
+  }
+
+  private showLoader(content) {
+    let loading = this.loadingCtrl.create({
+      content
+    });
+    loading.present();
+    return loading;
+  }
+
+  private async getVenueNearLocation(loc) {
+    return this.http
+      .get<any[]>(`http://${ENV.BACKEND_URL}/location/${loc.lat}/${loc.long}`)
+      .toPromise();
   }
 
 
