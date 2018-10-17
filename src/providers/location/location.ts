@@ -19,7 +19,7 @@ export class LocationProvider {
       this.lat = 23;
       this.long = 54;
       //await new Promise((resolve, reject) => setTimeout(reject, 2000));
-      await new Promise(resolve => setTimeout(resolve, 2000));      
+      await new Promise(resolve => setTimeout(resolve, 2000));
     } else {
       const resp = await this.geolocation.getCurrentPosition();
       this.lat = resp.coords.latitude;

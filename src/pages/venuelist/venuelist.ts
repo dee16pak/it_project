@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, LoadingController } from 'ionic-angular';
 import { LocationProvider } from '../../providers/location/location';
+import { ENV } from '../../env';
+import { HttpClient } from '@angular/common/http';
 
 /**
  * Generated class for the VenuelistPage page.
@@ -19,7 +21,7 @@ export class VenuelistPage {
   showLoading: boolean = false;
   showError: boolean = false;
   errorMsg: string = '';
-  constructor(public navCtrl: NavController, public loadingCtrl: LoadingController, public locProd: LocationProvider) {}
+  constructor(public navCtrl: NavController, public loadingCtrl: LoadingController, public http: HttpClient, public locProd: LocationProvider) {}
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad VenuelistPage');
@@ -42,22 +44,28 @@ export class VenuelistPage {
     loading.dismiss();
     loading = this.showLoader('Fetching Venues near your Location');
 
+    let list;
     try {
-      this.venueList = await this.getVenueNearLocation(loc);
+      list = await this.getVenueNearLocation(loc);
     } catch(err) {
       this.error('Error while getting Venuelist', loading);
       return;
     }
 
     loading.dismiss();
-    this.showLoading = false;
+    setTimeout(() => {
+      if(list) this.venueList = list;
+      this.showLoading = false;
+    }, 1000);
   }
 
   private error(errMsg, loading) {
     this.showError = true;
     this.errorMsg = errMsg;
     loading.dismiss();
-    this.showLoading = false;
+    setTimeout(() => {
+      this.showLoading = false;
+    }, 1000);
   }
 
   private showLoader(content) {
@@ -69,13 +77,9 @@ export class VenuelistPage {
   }
 
   private async getVenueNearLocation(loc) {
-    //await new Promise((resolve, reject) => setTimeout(reject, 2000));
-    return await new Promise<any[]>(resolve => setTimeout(() => {resolve(
-      [
-        {name : 'Dominos', menu_sub_list: ['Pizza', 'Desserts', 'Italian', 'Burgers'], thumbnail: 'assets/imgs/logo.png'},
-        {name : 'Dominos', menu_sub_list: ['Pizza', 'Desserts', 'Italian', 'Burgers'], thumbnail: 'assets/imgs/logo.png'}
-      ]
-    )}, 1000));
+    return this.http
+      .get<any[]>(`http://${ENV.BACKEND_URL}/location/${loc.lat}/${loc.long}`)
+      .toPromise();
   }
 
 
