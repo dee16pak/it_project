@@ -14,6 +14,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { HttpClientModule } from '@angular/common/http';
 import { LocationProvider } from '../providers/location/location';
+import { PayPal } from '@ionic-native/paypal'
 
 import { MenuPage } from '../pages/menu/menu';
 import {MenuModalPage} from '../pages/menu-modal/menu-modal'
@@ -49,6 +50,7 @@ import {MenuModalPage} from '../pages/menu-modal/menu-modal'
     CartdataproviderProvider,
     Geolocation,
     LocationProvider,
+    PayPal,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
   ]
 })
