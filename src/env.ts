@@ -1,3 +1,4 @@
 export const ENV = {
-    BACKEND_URL: "localhost:3000"
+    BACKEND_URL: "http://localhost:3000",
+    LOCAL_STORAGE_NAME: "__it_project_db"
 };

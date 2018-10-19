@@ -8,15 +8,20 @@ import { ListPage } from '../pages/list/list';
 import { CheckoutPage } from '../pages/checkout/checkout';
 import { CartdataproviderProvider } from '../providers/cartdataprovider/cartdataprovider';
 import { VenuelistPage } from '../pages/venuelist/venuelist';
+import { LoginPage } from '../pages/login/login';
 
 import { Geolocation } from '@ionic-native/geolocation';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { IonicStorageModule } from '@ionic/storage';
 import { HttpClientModule } from '@angular/common/http';
 import { LocationProvider } from '../providers/location/location';
 
 import { MenuPage } from '../pages/menu/menu';
 import {MenuModalPage} from '../pages/menu-modal/menu-modal'
+import { UserDataProvider } from '../providers/user-data/user-data';
+
+import { ENV } from '../env';
 
 @NgModule({
   declarations: [
@@ -26,12 +31,16 @@ import {MenuModalPage} from '../pages/menu-modal/menu-modal'
     MenuPage,
     MenuModalPage,
     CheckoutPage,
-    VenuelistPage
+    VenuelistPage,
+    LoginPage,
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     IonicModule.forRoot(MyApp),
+    IonicStorageModule.forRoot({
+      name: ENV.LOCAL_STORAGE_NAME
+    })
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -41,7 +50,8 @@ import {MenuModalPage} from '../pages/menu-modal/menu-modal'
     MenuPage,
     MenuModalPage,
     CheckoutPage,
-    VenuelistPage
+    VenuelistPage,
+    LoginPage,
   ],
   providers: [
     StatusBar,
@@ -50,6 +60,7 @@ import {MenuModalPage} from '../pages/menu-modal/menu-modal'
     Geolocation,
     LocationProvider,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
+    UserDataProvider,
   ]
 })
 export class AppModule {}

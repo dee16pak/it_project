@@ -78,7 +78,7 @@ export class VenuelistPage {
 
   private async getVenueNearLocation(loc) {
     return this.http
-      .get<any[]>(`http://${ENV.BACKEND_URL}/location/${loc.lat}/${loc.long}`)
+      .get<any[]>(`${ENV.BACKEND_URL}/location/${loc.lat}/${loc.long}`)
       .toPromise();
   }
 
