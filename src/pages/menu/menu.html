@@ -1,14 +1,24 @@
-
 <ion-header>
-
-  <ion-navbar>
-    <ion-title>menu</ion-title>
-  </ion-navbar>
-
+    <ion-navbar>
+      <button ion-button menuToggle>
+        <ion-icon name="Menu"></ion-icon>
+      </button>
+      
+      <ion-title>Home</ion-title>
+      <ion-buttons end style="padding: 2px">
+          <button ion-button clear (click)="gotoCheckout()">
+            <ion-icon ios="ios-cart" md="md-cart" large ></ion-icon>
+          </button>
+        </ion-buttons>
+      <ion-buttons end style="padding: 2px;">
+          <button ion-button clear (click)="gotoOrder()">
+              <ion-icon name="ios-clipboard-outline"></ion-icon>
+          </button>
+        </ion-buttons>
   
-
-</ion-header>
-
+    </ion-navbar>
+  </ion-header>
+  
 
 <ion-content padding>
 
@@ -19,14 +29,15 @@
             <ion-icon item-right name="md-arrow-dropleft" *ngIf="!group.check"></ion-icon>
             <ion-icon item-right name="md-arrow-dropdown" *ngIf="group.check"></ion-icon>
           &nbsp;
-          Menu {{group.name}}
+          Menu {{group.group_name}}
         </button>
         <ion-list *ngIf="group.check">
-        <ion-item *ngFor="let item of group.items;let j=index">
+        <ion-item *ngFor="let item of group.itemlist;let j=index">
 
           <button ion-item (click)="add_quantity(i,j)" detail-none>
           &nbsp; 
-           Item {{item.itemno}} <ion-icon ios="ios-basket" md="md-basket" style="float:right; color: aqua;">{{item.quantity}}</ion-icon>
+                  "qty": 0,
+                  Item {{item.item_name}} <ion-icon ios="ios-basket" md="md-basket" style="float:right; color: aqua;">{{item.qty}}</ion-icon>
         </button>
 
         </ion-item>

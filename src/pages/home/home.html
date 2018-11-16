@@ -5,11 +5,17 @@
     </button>
     
     <ion-title>Home</ion-title>
-    <ion-buttons end>
-      <button ion-button clear (click)="gotoCheckout()">
-        <ion-icon ios="ios-cart" md="md-cart" large ></ion-icon>
-      </button>
-    </ion-buttons>
+    <ion-buttons end style="padding: 2px">
+        <button ion-button clear (click)="gotoCheckout()">
+          <ion-icon ios="ios-cart" md="md-cart" large ></ion-icon>
+        </button>
+      </ion-buttons>
+    <ion-buttons end style="padding: 2px;">
+        <button ion-button clear (click)="gotoOrder()">
+            <ion-icon name="ios-clipboard-outline"></ion-icon>
+        </button>
+      </ion-buttons>
+
   </ion-navbar>
 </ion-header>
 

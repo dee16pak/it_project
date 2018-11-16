@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 //import { NULL_EXPR } from '@angular/compiler/src/output/output_ast';
 
 import { Modal } from 'ionic-angular';
+import { CheckoutPage } from '../checkout/checkout';
 
 import { ModalController } from 'ionic-angular';
 import { MenuModalPage } from '../menu-modal/menu-modal';
@@ -17,14 +18,7 @@ import { CartdataproviderProvider } from '../../providers/cartdataprovider/cartd
 
 export class MenuPage {
   myData = [];
-  
-  
-  
   constructor(public modalCtrl: ModalController, public navCtrl: NavController, public navParams: NavParams, private cart: CartdataproviderProvider) {
-
-    
-   
-
   }
  
   toggleGroup(i) {
@@ -51,5 +45,10 @@ export class MenuPage {
   checkout(){
     console.log("checkout");
   }
+  gotoCheckout(){
+    this.navCtrl.push(CheckoutPage);
+  }
+  
+
 
 }
