@@ -8,16 +8,16 @@ import { ListPage } from '../pages/list/list';
 import { CheckoutPage } from '../pages/checkout/checkout';
 import { CartdataproviderProvider } from '../providers/cartdataprovider/cartdataprovider';
 import { VenuelistPage } from '../pages/venuelist/venuelist';
-
+import { OrderPage} from '../pages/order/order';
 import { Geolocation } from '@ionic-native/geolocation';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { HttpClientModule } from '@angular/common/http';
 import { LocationProvider } from '../providers/location/location';
-import { PayPal } from '@ionic-native/paypal'
-
+import { PayPal } from '@ionic-native/paypal';
 import { MenuPage } from '../pages/menu/menu';
 import {MenuModalPage} from '../pages/menu-modal/menu-modal'
+import {OrderModalPage} from '../pages/order-modal/order-modal'
 
 @NgModule({
   declarations: [
@@ -27,7 +27,9 @@ import {MenuModalPage} from '../pages/menu-modal/menu-modal'
     MenuPage,
     MenuModalPage,
     CheckoutPage,
-    VenuelistPage
+    VenuelistPage,
+    OrderPage,
+    OrderModalPage,
   ],
   imports: [
     BrowserModule,
@@ -42,7 +44,9 @@ import {MenuModalPage} from '../pages/menu-modal/menu-modal'
     MenuPage,
     MenuModalPage,
     CheckoutPage,
-    VenuelistPage
+    VenuelistPage,
+    OrderPage,
+    OrderModalPage,
   ],
   providers: [
     StatusBar,
@@ -52,6 +56,7 @@ import {MenuModalPage} from '../pages/menu-modal/menu-modal'
     LocationProvider,
     PayPal,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
+   
   ]
 })
 export class AppModule {}

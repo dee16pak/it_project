@@ -1,0 +1,58 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Orders</ion-title>
+    <ion-buttons end>
+      <button ion-button clear>
+        <ion-icon ios="ios-cart" md="md-cart" large></ion-icon>
+        <!--TODO Change cart icon-->
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content no-padding>
+  <ion-list *ngIf="!showError && !showLoading && orderList.length > 0">
+    <!--ng-style="{ 'background' : (order.status == 1) ? '#92ec84' : '#f8c0c0' }"-->
+
+    <ion-card *ngFor="let order of orderList" [ngClass] = "{'order-green': order.status==1 , 'order-red': order.status==0}" no-padding>
+     
+      <button ion-item  (click)="openModal(order)">
+      
+        <ion-card-header>
+          <div style="font-size:18px; float: left;">{{order.venue}} </div>
+          <div style="text-align: right;font-size:16px ;float: right"><b>Order No.{{ order.orderno }}</b></div>
+
+        </ion-card-header >
+        <div *ngIf="order.status==1">
+          <ion-card-content no-padding *ngFor="let item of order.orderitem">
+            <ion-grid>
+              <ion-row justify-content-start align-items-center>
+                <ion-col col-7>
+                  {{ item.item_name }} &nbsp;&nbsp;<span style="font-size:11px;">( {{item.item_sub_name}}
+                    )</span>
+                </ion-col>
+                <ion-col col-3>
+                  {{item.qty}}
+
+                </ion-col>
+                <ion-col style="text-align: right;" col-2>{{item.price}}
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+
+
+          </ion-card-content>
+        </div>
+        <ion-card-content>
+
+          <div style="font-size:16px; float: left;">Total</div>
+          <div style="text-align: right;font-size:17px ;float: right"><b>{{ order.bill }}</b></div>
+        </ion-card-content>
+      </button>
+    </ion-card>
+
+
+  </ion-list>
+
+
+</ion-content>

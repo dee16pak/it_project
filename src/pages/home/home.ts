@@ -3,6 +3,8 @@ import { NavController } from 'ionic-angular';
 
 import { MenuPage } from '../menu/menu';
 import { CheckoutPage } from '../checkout/checkout';
+import { OrderPage } from '../order/order';
+
 import { VenuelistPage } from '../venuelist/venuelist';
 import { LocationProvider } from '../../providers/location/location';
 
@@ -36,5 +38,8 @@ export class HomePage {
 
   gotoVenuelist(){
     this.navCtrl.push(VenuelistPage);
+  }
+  gotoOrder(){
+    this.navCtrl.push(OrderPage);
   }
 }
