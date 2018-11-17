@@ -9,6 +9,7 @@ import { CheckoutPage } from '../pages/checkout/checkout';
 import { CartdataproviderProvider } from '../providers/cartdataprovider/cartdataprovider';
 import { VenuelistPage } from '../pages/venuelist/venuelist';
 import { OrderPage} from '../pages/order/order';
+import { UserProfileModalPage } from '../pages/user-profile-modal/user-profile-modal';
 
 import { LoginPage } from '../pages/login/login';
 
@@ -38,6 +39,7 @@ import { ENV } from '../env';
     OrderPage,
     OrderModalPage,
     LoginPage,
+    UserProfileModalPage,
   ],
   imports: [
     BrowserModule,
@@ -59,6 +61,7 @@ import { ENV } from '../env';
     OrderPage,
     OrderModalPage,
     LoginPage,
+    UserProfileModalPage,
   ],
   providers: [
     StatusBar,

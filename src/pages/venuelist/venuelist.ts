@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, LoadingController } from 'ionic-angular';
 import { LocationProvider } from '../../providers/location/location';
-import { ENV } from '../../env';
+import { UserDataProvider } from '../../providers/user-data/user-data';
 import { HttpClient } from '@angular/common/http';
+import { LoginPage } from '../login/login';
 
 /**
  * Generated class for the VenuelistPage page.
@@ -10,6 +11,8 @@ import { HttpClient } from '@angular/common/http';
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
  */
+
+const SEARCH_RADIUS_IN_MILES = 0.3106856;//0.5KM in miles
 
 @IonicPage()
 @Component({
@@ -21,7 +24,7 @@ export class VenuelistPage {
   showLoading: boolean = false;
   showError: boolean = false;
   errorMsg: string = '';
-  constructor(public navCtrl: NavController, public loadingCtrl: LoadingController, public http: HttpClient, public locProd: LocationProvider) {}
+  constructor(public navCtrl: NavController, public loadingCtrl: LoadingController, public http: HttpClient, public locProd: LocationProvider, public userProd: UserDataProvider) {}
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad VenuelistPage');
@@ -48,6 +51,9 @@ export class VenuelistPage {
     try {
       list = await this.getVenueNearLocation(loc);
     } catch(err) {
+      if(this.userProd.hasAuthFailed(err)) {
+        setTimeout(() => this.navCtrl.setRoot(LoginPage), 1500);
+      }
       this.error('Error while getting Venuelist', loading);
       return;
     }
@@ -78,10 +84,7 @@ export class VenuelistPage {
 
   private async getVenueNearLocation(loc) {
     return this.http
-      .get<any[]>(`${ENV.BACKEND_URL}/location/${loc.lat}/${loc.long}`)
+      .get<any[]>(this.userProd.makeUrl(`/venue/getNearby/${loc.lat}/${loc.long}/${SEARCH_RADIUS_IN_MILES}`, null, true, true))
       .toPromise();
   }
-
-
-
 }

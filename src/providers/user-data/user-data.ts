@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { ToastController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { ENV } from '../../env';
 
@@ -16,13 +17,12 @@ export class UserDataProvider {
   private isLoggedIn: boolean = false;
 
   private static SESSION_BASE: string = 'session';
-  constructor(public http: HttpClient, public storage: Storage) {
-    console.log('Hello UserDataProvider Provider');
-  }
+  constructor(public http: HttpClient, public storage: Storage, public toast: ToastController) { }
 
-  private makeUrl(uri, session, addQueryString=true) {
+  makeUrl(uri, session, addQueryString=true, useCurrentSession=false) {
     let url =  `${ENV.BACKEND_URL}${uri}`;
     if(addQueryString) {
+      if(useCurrentSession) session = this.session;
       url += `?email=${session.email}&sid=${session.sid}`;
     }
     return url;
@@ -44,7 +44,7 @@ export class UserDataProvider {
   }
 
   signup(user) {
-    return this.http.post(this.makeUrl('/user/registrationRequest', null, false), { user }, {}).toPromise();
+    return this.http.post(this.makeUrl('/user/registrationRequest', null, false), { ...user }, {}).toPromise();
   }
 
   async checkLogin() {//get prev session from local storage and validate from server
@@ -55,6 +55,18 @@ export class UserDataProvider {
     } else {
       throw new Error('Not LoggedIn');
     }
+  }
+
+  hasAuthFailed(httpResponseError) {
+    if(httpResponseError.error && httpResponseError.error['auth_failed']) {
+      this.toast.create({
+        message: 'You\'ve been logged out.',
+        duration: 3000,
+        position: 'bottom'
+      }).present();
+      return true;
+    }
+    return false;
   }
 
   async logout() {

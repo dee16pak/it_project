@@ -1,11 +1,12 @@
 import { Component, ViewChild } from '@angular/core';
-import { Nav, Platform, ToastController } from 'ionic-angular';
+import { Nav, Platform, ToastController, ModalController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { HomePage } from '../pages/home/home';
 //import { ListPage } from '../pages/list/list';
 import { LoginPage } from '../pages/login/login';
+import { UserProfileModalPage } from '../pages/user-profile-modal/user-profile-modal';
 
 import { UserDataProvider } from '../providers/user-data/user-data';
 
@@ -19,7 +20,7 @@ export class MyApp {
 
   pages: Array<{title: string, component: any}>;
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, public userDataProvider: UserDataProvider, public toastCtrl: ToastController) {
+  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, public userDataProvider: UserDataProvider, public toastCtrl: ToastController, public modalCtrl: ModalController) {
     this.initializeApp();
 
     // used for an example of ngFor and navigation
@@ -34,8 +35,21 @@ export class MyApp {
     this.platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
-      this.statusBar.styleDefault();
-      this.splashScreen.hide();
+      this.splashScreen.show();
+      this.userDataProvider.checkLogin().then(() => {
+        this.nav.setRoot(HomePage);
+        //this.nav.setRoot(HomePage);
+        setTimeout(() => {
+          this.statusBar.styleDefault();
+          this.splashScreen.hide();
+        }, 2000);
+        console.log("init logged in already");
+      }).catch(err => {
+        this.statusBar.styleDefault();
+        this.splashScreen.hide();
+        this.nav.setRoot(LoginPage);
+        console.log("init not logged in already");
+      });
     });
   }
 
@@ -58,6 +72,11 @@ export class MyApp {
       }).present();
       console.log(err);
     });
+  }
+
+  openProfileModal() {
+    let modal = this.modalCtrl.create(UserProfileModalPage);
+    modal.present();
   }
   
   isLoggedIn() {
