@@ -1,5 +1,19 @@
 page-menu {
-
+     .refresh-btn-top{
+          font-size: 25px;
+      }
+     .no-list{
+          color: #757575;
+          display: flex !important;
+          justify-content: center !important;
+          align-items: center !important;
+          height: 80%;
+          flex-direction: column;
+  
+          ion-icon {
+              font-size: 100px;
+          }
+      }
 }
 .label-md {
      margin: 0px 0px 0px 0; 

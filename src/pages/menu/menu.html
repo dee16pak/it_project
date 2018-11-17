@@ -1,54 +1,94 @@
 <ion-header>
-    <ion-navbar>
-      <button ion-button menuToggle>
-        <ion-icon name="Menu"></ion-icon>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="Menu"></ion-icon>
+    </button>
+
+    <ion-title>Home</ion-title>
+
+    <!-- <ion-buttons end style="padding: 2px">
+      <button ion-button clear (click)="refreshAndGetMenu()">
+        <ion-icon ion-button clear large></ion-icon>
       </button>
-      
-      <ion-title>Home</ion-title>
-      <ion-buttons end style="padding: 2px">
-          <button ion-button clear (click)="gotoCheckout()">
-            <ion-icon ios="ios-cart" md="md-cart" large ></ion-icon>
-          </button>
-        </ion-buttons>
-      <ion-buttons end style="padding: 2px;">
-          <button ion-button clear (click)="gotoOrder()">
-              <ion-icon name="ios-clipboard-outline"></ion-icon>
-          </button>
-        </ion-buttons>
-  
-    </ion-navbar>
-  </ion-header>
-  
+    </ion-buttons> -->
 
-<ion-content padding>
+    <ion-buttons end style="padding: 2px">
+      <button ion-button clear (click)="gotoCheckout()">
+        <ion-icon ios="ios-cart" md="md-cart" large></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-buttons end style="padding: 2px;">
+      <button ion-button clear (click)="gotoOrder()">
+        <ion-icon name="ios-clipboard-outline"></ion-icon>
+      </button>
+    </ion-buttons>
+
+  </ion-navbar>
+</ion-header>
 
 
-    <ion-list >
-        <ion-item  *ngFor="let group of cart.groups ;let i =index" class="item-stable" >
-            <button ion-item (click)="toggleGroup(i)" detail-none>
-            <ion-icon item-right name="md-arrow-dropleft" *ngIf="!group.check"></ion-icon>
-            <ion-icon item-right name="md-arrow-dropdown" *ngIf="group.check"></ion-icon>
-          &nbsp;
-          Menu {{group.group_name}}
-        </button>
-        <ion-list *ngIf="group.check">
+<ion-content no-padding>
+
+    <!-- && cart.groups.length > 0 -->
+  <ion-list *ngIf="!showError && !showLoading && cart.groups.length>0">
+    <ion-item *ngFor="let group of cart.groups ;let i =index"  class="item-stable">
+
+      <button ion-item (click)="toggleGroup(i)" detail-none>
+        <ion-icon item-right name="md-arrow-dropleft" *ngIf="!group.check"></ion-icon>
+        <ion-icon item-right name="md-arrow-dropdown" *ngIf="group.check"></ion-icon>
+        &nbsp;
+        {{group.group_name}}
+      </button>
+      <ion-list *ngIf="group.check">
         <ion-item *ngFor="let item of group.itemlist;let j=index">
 
           <button ion-item (click)="add_quantity(i,j)" detail-none>
-          &nbsp; 
-                  "qty": 0,
-                  Item {{item.item_name}} <ion-icon ios="ios-basket" md="md-basket" style="float:right; color: aqua;">{{item.qty}}</ion-icon>
-        </button>
+
+            <ion-grid no-padding>
+              <ion-row justify-content-start align-items-center>
+                <ion-col col-2>
+
+                  <ion-avatar item-start>
+                    <img [src]="">
+                  </ion-avatar>
+                </ion-col>
+                <ion-col col-5>
+                  {{ item.item_name }} &nbsp;&nbsp;<span style="font-size:11px;">( {{item.item_sub_name}}
+                    )</span>
+                </ion-col>
+                <ion-col style="text-align: right;" col-2>{{item.price}}
+                </ion-col>
+                <ion-col col-3>
+
+                  <ion-icon ios="ios-basket" md="md-basket" style="float:right; color:red;">{{item.qty}}</ion-icon>
+
+
+                </ion-col>
+
+
+              </ion-row>
+            </ion-grid>
+          </button>
 
         </ion-item>
-        </ion-list>
-      </ion-item>
-      <ion-item></ion-item>
-    </ion-list>
+      </ion-list>
+    </ion-item>
+    <ion-item></ion-item>
+  </ion-list>
 
+  <div class="no-list" text-center *ngIf="!showError && !showLoading && cart.groups.length == 0">
+    <ion-icon name="ios-warning-outline"></ion-icon>
+    <h5>No Menu Found</h5>
+    <p>There are no menu added by this venue...</p>
+  </div>
+  <div class="no-list" text-center *ngIf="!showLoading && showError">
+    <ion-icon name="ios-warning-outline"></ion-icon>
+    <h5>Error</h5>
+    <p>{{ errorMsg }}</p>
+  </div>
 
 </ion-content>
 
-<ion-footer *ngIf="cart.checkt"> 
-    <button (click)="checkout()" ion-button color="secondary" full bottom style="margin: 0px;height: 48px;">Checkout</button>
+<ion-footer *ngIf="cart.checkt">
+  <button (click)="gotoCheckout()" ion-button color="secondary" full bottom style="margin: 0px;height: 48px;">Checkout</button>
 </ion-footer>
