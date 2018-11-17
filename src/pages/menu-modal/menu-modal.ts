@@ -24,8 +24,7 @@ export class MenuModalPage {
   addtocart(){
     
     this.cart.groups[this.cart.pos.i].itemlist[this.cart.pos.j].qty = this.data.quantity;
-
-      this.cart.checkempty();
+    this.cart.checkempty();
   }
   closeModal(){
     console.log("close");

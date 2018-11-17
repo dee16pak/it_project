@@ -21,20 +21,20 @@
       <ion-grid no-padding>
         <ion-row justify-content-start align-items-center>
           <ion-col col-7>
-            {{ cart.itemname }} &nbsp;&nbsp;<span style="font-size:11px;">( {{cart.submenu}}
+            {{ cart.item_name }} &nbsp;&nbsp;<span style="font-size:11px;">( {{cart.item_sub_name}}
               )</span>
           </ion-col>
           <ion-col col-3>
             <button ion-button icon-only (click)="sub(cart)" color="danger" small clear>
               <ion-icon name="md-remove"></ion-icon>
             </button>
-            {{cart.quantity}}
+            {{cart.qty}}
             <button ion-button icon-only (click)="add(cart)" color="secondary" small clear>
               <ion-icon name="md-add"></ion-icon>
             </button>
 
           </ion-col>
-          <ion-col style="text-align: right;" col-2>{{cart.price * cart.quantity}}
+          <ion-col style="text-align: right;" col-2>{{cart.price * cart.qty}}
           </ion-col>
         </ion-row>
       </ion-grid>
