@@ -4,6 +4,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { HomePage } from '../pages/home/home';
+import { VenuelistPage } from '../pages/venuelist/venuelist';
 //import { ListPage } from '../pages/list/list';
 import { LoginPage } from '../pages/login/login';
 import { UserProfileModalPage } from '../pages/user-profile-modal/user-profile-modal';
@@ -25,7 +26,7 @@ export class MyApp {
 
     // used for an example of ngFor and navigation
     this.pages = [
-      { title: 'Home', component: HomePage },
+      { title: 'Home', component: VenuelistPage },
       // { title: 'List', component: ListPage }
     ];
 
@@ -37,7 +38,7 @@ export class MyApp {
       // Here you can do any higher level native things you might need.
       this.splashScreen.show();
       this.userDataProvider.checkLogin().then(() => {
-        this.nav.setRoot(HomePage);
+        this.nav.setRoot(VenuelistPage);
         //this.nav.setRoot(HomePage);
         setTimeout(() => {
           this.statusBar.styleDefault();

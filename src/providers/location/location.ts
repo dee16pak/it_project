@@ -16,8 +16,8 @@ export class LocationProvider {
 
   private async refreshLocation() {
     if(this.platform.is('core')) {//Dummy value for debugging on desktop browser.
-      this.lat = 23;
-      this.long = 54;
+      this.lat = 26.5064511;
+      this.long = 80.2261798;
       //await new Promise((resolve, reject) => setTimeout(reject, 2000));
       await new Promise(resolve => setTimeout(resolve, 2000));
     } else {

@@ -4,6 +4,8 @@ import { LocationProvider } from '../../providers/location/location';
 import { UserDataProvider } from '../../providers/user-data/user-data';
 import { HttpClient } from '@angular/common/http';
 import { LoginPage } from '../login/login';
+import { OrderPage } from '../order/order';
+import { MenuPage } from '../menu/menu';
 
 /**
  * Generated class for the VenuelistPage page.
@@ -86,5 +88,15 @@ export class VenuelistPage {
     return this.http
       .get<any[]>(this.userProd.makeUrl(`/venue/getNearby/${loc.lat}/${loc.long}/${SEARCH_RADIUS_IN_MILES}`, null, true, true))
       .toPromise();
+  }
+
+  gotoOrder(){
+    this.navCtrl.push(OrderPage);
+  }
+
+  onVenueClick(venue) {
+    this.userProd.curSelectedVenue = venue;
+    this.navCtrl.push(MenuPage);
+    console.log("Selected Venue: ", venue);
   }
 }
