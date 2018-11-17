@@ -12,7 +12,7 @@ import { CartdataproviderProvider } from '../../providers/cartdataprovider/cartd
 export class CheckoutPage {
   cartList: any[] = [];
   total: any;
-  order: { user: string; venue: string; orderitem: { item_name: string; item_sub_name: string; price: number; qty: number; }[]; transationid: string; bill: number; };
+  order: { user: string; venueid: string;venue_name: string; orderitem: { item_name: string; item_sub_name: string; price: number; qty: number; }[]; transationid: string; bill: number; };
 
   constructor(public toastCtrl: ToastController, public http: HttpClient, private payPal: PayPal, public navCtrl: NavController, public navParams: NavParams, private cartProvider: CartdataproviderProvider, private alertCtrl: AlertController) {
     this.cartList = [
@@ -57,7 +57,8 @@ export class CheckoutPage {
     this.order =     
     {
       user: "d@gmail.com",
-      venue: "TODO",
+      venueid: "TODO",
+      venue_name : "TODO",
       orderitem:this.cartList,
       transationid: "TODO",
       bill: this.total

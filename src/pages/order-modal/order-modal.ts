@@ -22,7 +22,8 @@ order:any[] = [];
   ionViewDidLoad() {
     console.log('ionViewDidLoad OrderModalPage');
     this.order = this.navParams.get('data');
-    console.log(this.order);
+    this.order['orderno'] = this.order['orderno'].split('-')[0];
+    console.log(this.order['orderno'].split('-')[0]);
   }
   closeModal(){
     console.log("close");

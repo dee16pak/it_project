@@ -86,6 +86,6 @@
         <variable name="GEOLOCATION_USAGE_DESCRIPTION" value="To locate you" />
     </plugin>
     <plugin name="com.paypal.cordova.mobilesdk" spec="~3.5.0" />
-    <engine name="android" spec="7.1.1" />
     <plugin name="cordova-sqlite-storage" spec="2.5.0" />
+    <engine name="android" spec="7.1.1" />
 </widget>

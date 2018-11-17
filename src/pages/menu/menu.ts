@@ -39,16 +39,9 @@ export class MenuPage {
     let loading = this.showLoader('Fetching menu for your selected location');
 
     let venue_name;
-    try {
       venue_name = 'waah2';//TODO change here to add selected venue
-    } catch(err) {
-      this.error('Error while getting your Venue.', loading);
-      return;
-    }
-
-    loading.dismiss();
-    loading = this.showLoader('Fetching menu for your selected location');
-
+   
+   
     let list;
     try {
       list = await this.getMenu(venue_name);
