@@ -15,6 +15,7 @@ export class UserDataProvider {
   //private user: any = undefined;
   private session: any = undefined;
   private isLoggedIn: boolean = false;
+  public curSelectedVenue = null;
 
   private static SESSION_BASE: string = 'session';
   constructor(public http: HttpClient, public storage: Storage, public toast: ToastController) { }
@@ -32,6 +33,10 @@ export class UserDataProvider {
     this.storage.set(UserDataProvider.SESSION_BASE, session);
     this.isLoggedIn = true;
     this.session = session;
+  }
+
+  getUserId() {
+    return this.session.email;
   }
 
   isUserLoggedIn() {

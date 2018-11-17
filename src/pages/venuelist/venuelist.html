@@ -6,7 +6,15 @@
 -->
 <ion-header>
   <ion-navbar>
-    <ion-title>Available Venues</ion-title>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-buttons end style="padding: 2px;">
+        <button ion-button clear (click)="gotoOrder()">
+          <ion-icon name="ios-clipboard-outline"></ion-icon>
+        </button>
+      </ion-buttons>
+    <ion-title>Home</ion-title>
     <ion-buttons end>
       <button ion-button clear (click)="refreshAndGetShit()">
         <ion-icon class="refresh-btn-top" name="refresh"></ion-icon>
@@ -21,12 +29,12 @@
     <ion-item text-center class="first-item">
       {{ venueList.length || 'No' }} Options Available
     </ion-item>
-    <ion-item *ngFor="let venue of venueList">
+    <ion-item *ngFor="let venue of venueList" (click)="onVenueClick(venue)">
       <ion-avatar item-start>
-        <img [src]="venue.thumbnail">
+        <img [src]="venue.image">
       </ion-avatar>
-      <h2>{{ venue.name }}</h2>
-      <h3>{{ venue.menu_sub_list.join(', ') }}</h3>
+      <h2>{{ venue.name }}, <small>{{ venue.addr }}</small></h2>
+      <h3>{{ venue.serve }}</h3>
     </ion-item>
   </ion-list>
 
