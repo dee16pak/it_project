@@ -23,6 +23,7 @@ order:any[] = [];
     console.log('ionViewDidLoad OrderModalPage');
     this.order = this.navParams.get('data');
     this.order['orderno'] = this.order['orderno'].split('-')[0];
+    this.order['placetime'] = this.order['placetime'].split('.')[0];
     console.log(this.order['orderno'].split('-')[0]);
   }
   closeModal(){
