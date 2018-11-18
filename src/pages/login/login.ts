@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 import { UserDataProvider } from '../../providers/user-data/user-data';
+import { VenuelistPage } from '../venuelist/venuelist';
 
-import { HomePage } from '../home/home';
+//import { HomePage } from '../home/home';
 /**
  * Generated class for the LoginPage page.
  *
@@ -40,25 +41,25 @@ export class LoginPage {
 
   submitRequest() {
     console.log(this.user);
-    if(this.isSignUp) {
+    if (this.isSignUp) {
       this.userDataProvider.signup(this.user)
-      .then(() => {
-        this.makeToast('Signup successfully.\n Login to continue.');
-        this.isSignUp = false;
-      })
-      .catch(err => {
-        this.makeToast('Error Occured, while signing up.');
-        console.log(err);
-      });
+        .then(() => {
+          this.makeToast('Signup successfully.\n Login to continue.');
+          this.isSignUp = false;
+        })
+        .catch(err => {
+          this.makeToast('Error Occured, while signing up.');
+          console.log(err);
+        });
     } else {
       this.userDataProvider.login(this.user.email, this.user.password)
-      .then(() => {
-        this.navCtrl.setRoot(HomePage);
-      })
-      .catch(err => {
-        this.makeToast('Error Occured, while logging in.');
-        console.log(err);
-      });
+        .then(() => {
+          this.navCtrl.setRoot(VenuelistPage);
+        })
+        .catch(err => {
+          this.makeToast('Error Occured, while logging in.');
+          console.log(err);
+        });
     }
   }
 

@@ -11,6 +11,7 @@ import { CartdataproviderProvider } from '../../providers/cartdataprovider/cartd
 import { ENV } from '../../env';
 import { HttpClient } from '@angular/common/http';
 import { OrderPage } from '../order/order';
+import { UserDataProvider } from '../../providers/user-data/user-data';
 
 
 @IonicPage()
@@ -25,7 +26,7 @@ export class MenuPage {
   showError: boolean = false;
   errorMsg: string = '';
   
-  constructor( public loadingCtrl: LoadingController, public http: HttpClient,public modalCtrl: ModalController, public navCtrl: NavController, public navParams: NavParams,public cart: CartdataproviderProvider) {
+  constructor( public user : UserDataProvider, public loadingCtrl: LoadingController, public http: HttpClient,public modalCtrl: ModalController, public navCtrl: NavController, public navParams: NavParams,public cart: CartdataproviderProvider) {
   }
   ionViewDidLoad() {
 
@@ -39,7 +40,7 @@ export class MenuPage {
     let loading = this.showLoader('Fetching menu for your selected location');
 
     let venue_name;
-      venue_name = 'waah2';//TODO change here to add selected venue
+      venue_name = this.user.curSelectedVenue._id;//TODO change here to add selected venue
    
    
     let list;

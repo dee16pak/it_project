@@ -3,7 +3,7 @@ import { Nav, Platform, ToastController, ModalController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
-import { HomePage } from '../pages/home/home';
+//import { HomePage } from '../pages/home/home';
 import { VenuelistPage } from '../pages/venuelist/venuelist';
 //import { ListPage } from '../pages/list/list';
 import { LoginPage } from '../pages/login/login';
@@ -40,10 +40,15 @@ export class MyApp {
       this.userDataProvider.checkLogin().then(() => {
         this.nav.setRoot(VenuelistPage);
         //this.nav.setRoot(HomePage);
-        setTimeout(() => {
-          this.statusBar.styleDefault();
+         // this.statusBar.styleDefault();
+         // let status bar overlay webview
+          this.statusBar.overlaysWebView(true);
+
+         // this.statusBar.backgroundColorByHexString('#ffffff');
+         this.statusBar.styleDefault();
+          this.statusBar.show();
+          console.log("is status showing"+this.statusBar.isVisible);
           this.splashScreen.hide();
-        }, 2000);
         console.log("init logged in already");
       }).catch(err => {
         this.statusBar.styleDefault();

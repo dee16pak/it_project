@@ -4,6 +4,8 @@ import { PayPal } from '@ionic-native/paypal';
 import { AlertController, IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 import { ENV } from '../../env';
 import { CartdataproviderProvider } from '../../providers/cartdataprovider/cartdataprovider';
+import { UserDataProvider } from '../../providers/user-data/user-data';
+import { OrderPage } from '../order/order';
 @IonicPage()
 @Component({
   selector: 'page-checkout',
@@ -14,7 +16,7 @@ export class CheckoutPage {
   total: any;
   order: { user: string; venueid: string;venue_name: string; orderitem: { item_name: string; item_sub_name: string; price: number; qty: number; }[]; transationid: string; bill: number; };
 
-  constructor(public toastCtrl: ToastController, public http: HttpClient, private payPal: PayPal, public navCtrl: NavController, public navParams: NavParams, private cartProvider: CartdataproviderProvider, private alertCtrl: AlertController) {
+  constructor(public user : UserDataProvider, public http: HttpClient, private payPal: PayPal, public navCtrl: NavController, public navParams: NavParams, private cartProvider: CartdataproviderProvider, private alertCtrl: AlertController) {
     this.cartList = [
     ];
     this.total = 0.0;
@@ -55,10 +57,10 @@ export class CheckoutPage {
 
    // console.log(this.cartList.it);
     this.order =     
-    {
-      user: "d@gmail.com",
-      venueid: "TODO",
-      venue_name : "TODO",
+    { 
+      user: this.user.getUserId(),
+      venueid: this.user.curSelectedVenue._id,
+      venue_name : this.user.curSelectedVenue.name,
       orderitem:this.cartList,
       transationid: "TODO",
       bill: this.total
@@ -66,22 +68,37 @@ export class CheckoutPage {
 
     this.orderdb(this.order)
       .then(() => {
-        this.makeToast('placed successfully.');
+        this.showAlert('Order Placed','Your order has been placed succuessfully. Going to orders page to check status');
+        for(let cart of this.cartList ){
+          this.cartProvider.groups[cart.group_id].itemlist[cart.item_id].qty = 0
+        }
+        this.cartList = [];
+        
       })
       .catch(err => {
-        this.makeToast('Error Occured, while ordering up.');
+        this.showAlert('Error','Error while placing your order try again.');
         console.log(err);
       });
 
 
   }
-  private makeToast(message) {
-    this.toastCtrl.create({
-      message,
-      duration: 3000,
-      position: 'bottom'
-    }).present();
+  showAlert(title,subTitle) {
+    const alert = this.alertCtrl.create({
+      title: title ,
+      subTitle: subTitle,
+      buttons: ['OK']
+    });
+    alert.present().then(()=>{this.navCtrl.push(OrderPage);} )
+
   }
+
+  // private makeToast(message) {
+  //   this.toastCtrl.create({
+  //     message,
+  //     duration: 3000,
+  //     position: 'bottom'
+  //   }).present();
+  // }
   orderdb(orders) {
     console.log(orders);
     return this.http.post(this.makeUrl('/order/orderRegisteration', null, false), { order: orders }, {}).toPromise();
@@ -178,6 +195,9 @@ export class CheckoutPage {
         }
       }
     }
+  }
+  gotoOrder(){
+    this.navCtrl.push(OrderPage);
   }
 
 }
