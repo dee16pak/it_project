@@ -28,7 +28,13 @@ export class VenuelistPage {
   errorMsg: string = '';
   constructor(public navCtrl: NavController, public loadingCtrl: LoadingController, public http: HttpClient, public locProd: LocationProvider, public userProd: UserDataProvider) {}
 
+  ionViewWillEnter() {
+    if(this.userProd.isUserLoggedIn() == false)
+      this.navCtrl.setRoot(LoginPage);
+  }
+
   ionViewDidLoad() {
+    if(this.userProd.isUserLoggedIn() == false) return;
     console.log('ionViewDidLoad VenuelistPage');
     this.refreshAndGetShit();
   }

@@ -3,7 +3,6 @@ import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 
 import { MyApp } from './app.component';
-import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
 import { CheckoutPage } from '../pages/checkout/checkout';
 import { CartdataproviderProvider } from '../providers/cartdataprovider/cartdataprovider';
@@ -30,7 +29,6 @@ import { ENV } from '../env';
 @NgModule({
   declarations: [
     MyApp,
-    HomePage,
     ListPage,
     MenuPage,
     MenuModalPage,
@@ -52,7 +50,6 @@ import { ENV } from '../env';
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    HomePage,
     ListPage,
     MenuPage,
     MenuModalPage,

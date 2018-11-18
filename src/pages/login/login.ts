@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 import { UserDataProvider } from '../../providers/user-data/user-data';
 
-import { HomePage } from '../home/home';
+import { VenuelistPage } from '../venuelist/venuelist';
 /**
  * Generated class for the LoginPage page.
  *
@@ -53,7 +53,7 @@ export class LoginPage {
     } else {
       this.userDataProvider.login(this.user.email, this.user.password)
       .then(() => {
-        this.navCtrl.setRoot(HomePage);
+        this.navCtrl.setRoot(VenuelistPage);
       })
       .catch(err => {
         this.makeToast('Error Occured, while logging in.');
