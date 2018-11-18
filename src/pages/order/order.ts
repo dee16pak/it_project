@@ -53,7 +53,7 @@ export class OrderPage {
 
     loading.dismiss();
     setTimeout(() => {
-      if(list) this.orderList = list;
+      if(list) this.orderList = list.reverse();
       this.showLoading = false;
     }, 1000);
   }

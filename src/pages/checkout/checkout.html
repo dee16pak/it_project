@@ -1,11 +1,12 @@
 <ion-header>
   <ion-navbar>
     <ion-title>Cart</ion-title>
-    <ion-buttons end>
-      <button ion-button clear><ion-icon ios="ios-cart" md="md-cart" large></ion-icon>
-        <!--TODO Change cart icon-->
+    <ion-buttons end style="padding: 2px;">
+      <button ion-button clear (click)="gotoOrder()">
+        <ion-icon name="ios-clipboard-outline"></ion-icon>
       </button>
     </ion-buttons>
+
   </ion-navbar>
 </ion-header>
 

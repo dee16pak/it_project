@@ -1,12 +1,12 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>Orders</ion-title>
-    <ion-buttons end>
+     <ion-title>Orders</ion-title>
+    <!-- <ion-buttons end>
       <button ion-button clear>
         <ion-icon ios="ios-cart" md="md-cart" large></ion-icon>
-        <!--TODO Change cart icon-->
+       
       </button>
-    </ion-buttons>
+    </ion-buttons>  -->
   </ion-navbar>
 </ion-header>
 
@@ -19,8 +19,8 @@
       <button ion-item  (click)="openModal(order)">
       
         <ion-card-header>
-          <div style="font-size:18px; float: left;">{{order.venue}} </div>
-          <div style="text-align: right;font-size:16px ;float: right"><b>Order No.{{ order.orderno }}</b></div>
+          <div style="font-size:18px; float: left;">{{order.venue_name}} </div>
+          <div style="text-align: right;font-size:16px ;float: right"><b>Order No.{{ order.orderno.split("-")[0] }}</b></div>
 
         </ion-card-header >
         <div *ngIf="order.status==1">
@@ -53,6 +53,15 @@
 
 
   </ion-list>
-
+  <div class="no-list" text-center *ngIf="!showError && !showLoading && orderList.length == 0">
+    <ion-icon name="ios-warning-outline"></ion-icon>
+    <h5>No Orders Found</h5>
+    <p>There are no old orders under your name</p>
+  </div>
+  <div class="no-list" text-center *ngIf="!showLoading && showError">
+    <ion-icon name="ios-warning-outline"></ion-icon>
+    <h5>Error</h5>
+    <p>{{ errorMsg }}</p>
+  </div>
 
 </ion-content>
