@@ -50,7 +50,6 @@ export class OrderPage {
       this.error('Error while getting Order List', loading);
       return;
     }
-
     loading.dismiss();
     setTimeout(() => {
       if(list) this.orderList = list.reverse();

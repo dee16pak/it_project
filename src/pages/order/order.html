@@ -1,6 +1,6 @@
 <ion-header>
   <ion-navbar>
-     <ion-title>Orders</ion-title>
+    <ion-title>Orders</ion-title>
     <!-- <ion-buttons end>
       <button ion-button clear>
         <ion-icon ios="ios-cart" md="md-cart" large></ion-icon>
@@ -14,16 +14,17 @@
   <ion-list *ngIf="!showError && !showLoading && orderList.length > 0">
     <!--ng-style="{ 'background' : (order.status == 1) ? '#92ec84' : '#f8c0c0' }"-->
 
-    <ion-card *ngFor="let order of orderList" [ngClass] = "{'order-green': order.status==1 , 'order-red': order.status==0}" no-padding>
-     
-      <button ion-item  (click)="openModal(order)">
-      
-        <ion-card-header>
-          <div style="font-size:18px; float: left;">{{order.venue_name}} </div>
-          <div style="text-align: right;font-size:16px ;float: right"><b>Order No.{{ order.orderno.split("-")[0] }}</b></div>
+    <ion-card *ngFor="let order of orderList" [ngClass]="{'order-green': order.status==1 , 'order-red': order.status==0}"
+      no-padding>
 
-        </ion-card-header >
-        <div *ngIf="order.status==1">
+      <button ion-item (click)="openModal(order)">
+
+        <ion-card-header>
+          <div style="font-size:18px; float: left;color: white">{{order.venue_name}} </div>
+          <div style="text-align: right;font-size:16px ;float: right;color: white">Order No.:<b>{{ order.orderno.split("-")[0] }}</b></div>
+
+        </ion-card-header>
+        <div *ngIf="order.status==0">
           <ion-card-content no-padding *ngFor="let item of order.orderitem">
             <ion-grid>
               <ion-row justify-content-start align-items-center>
@@ -33,14 +34,11 @@
                 </ion-col>
                 <ion-col col-3>
                   {{item.qty}}
-
                 </ion-col>
-                <ion-col style="text-align: right;" col-2>{{item.price}}
+                <ion-col style="text-align: right;" col-2>{{item.price*item.qty}}
                 </ion-col>
               </ion-row>
             </ion-grid>
-
-
           </ion-card-content>
         </div>
         <ion-card-content>

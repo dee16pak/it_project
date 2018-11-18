@@ -14,7 +14,8 @@ import { OrderPage } from '../order/order';
 export class CheckoutPage {
   cartList: any[] = [];
   total: any;
-  order: { user: string; venueid: string;venue_name: string; orderitem: { item_name: string; item_sub_name: string; price: number; qty: number; }[]; transationid: string; bill: number; };
+  order: { user: string; status : Number, venueid: string;venue_name: string; orderitem: { item_name: string; item_sub_name: string; price: number; qty: number; }[]; transationid: string; bill: number; };
+  orderFlag: boolean;
 
   constructor(public user : UserDataProvider, public http: HttpClient, private payPal: PayPal, public navCtrl: NavController, public navParams: NavParams, private cartProvider: CartdataproviderProvider, private alertCtrl: AlertController) {
     this.cartList = [
@@ -54,7 +55,8 @@ export class CheckoutPage {
   }
 
   placeorder() {
-
+    if(this.orderFlag){
+      if(this.total>0){
    // console.log(this.cartList.it);
     this.order =     
     { 
@@ -63,6 +65,7 @@ export class CheckoutPage {
       venue_name : this.user.curSelectedVenue.name,
       orderitem:this.cartList,
       transationid: "TODO",
+      status: 0,
       bill: this.total
     }
 
@@ -73,14 +76,16 @@ export class CheckoutPage {
           this.cartProvider.groups[cart.group_id].itemlist[cart.item_id].qty = 0
         }
         this.cartList = [];
-        
+        this.total=0;
+        this.orderFlag = false;
+    
       })
       .catch(err => {
         this.showAlert('Error','Error while placing your order try again.');
         console.log(err);
       });
-
-
+    }
+    }
   }
   showAlert(title,subTitle) {
     const alert = this.alertCtrl.create({
@@ -189,6 +194,7 @@ export class CheckoutPage {
               temp.group_id = i;
               temp.item_id = j;
               this.cartList.push(this.cartProvider.groups[i].itemlist[j])
+              this.orderFlag= true;
               // console.log(this.cart.groups[i].items[j].price)
             }
           }

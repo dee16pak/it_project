@@ -41,10 +41,10 @@ export class MyApp {
         //this.nav.setRoot(HomePage);
          // this.statusBar.styleDefault();
          // let status bar overlay webview
-          this.statusBar.overlaysWebView(true);
+       //   this.statusBar.overlaysWebView(true);
 
          // this.statusBar.backgroundColorByHexString('#ffffff');
-         this.statusBar.styleDefault();
+         //this.statusBar.styleDefault();
           this.statusBar.show();
           console.log("is status showing"+this.statusBar.isVisible);
           this.splashScreen.hide();

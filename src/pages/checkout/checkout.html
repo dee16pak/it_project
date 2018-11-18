@@ -55,11 +55,8 @@
       <!-- <div style="height:40px"></div> -->
     </ion-item>
   </ion-list>
-  <ion-footer no-shadow class="fixed-bottom" no-padding style="margin:0px;">
-    <ion-toolbar position="bottom" no-padding style="margin:0px;"><button style="margin:0px;height: 48px;" ion-button
-        icon-only (click)="checkout()" color="secondary" full>
-        Checkout<ion-icon name="ios-send-outline"></ion-icon>
-      </button></ion-toolbar>
+  <ion-footer *ngIf="orderFlag">
+    <button (click)="checkout()" ion-button color="secondary" full bottom style="margin: 0px;height: 48px;">Place Order</button>
   </ion-footer>
   <div class="no-list" text-center *ngIf="cartList.length == 0">
     <ion-icon name="ios-warning-outline"></ion-icon>
