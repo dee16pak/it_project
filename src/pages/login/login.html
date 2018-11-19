@@ -7,14 +7,77 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>IT - Project</ion-title>
+    <ion-title>Loc Restro</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content>
-  <ion-fab top right edge>
+
+    <!-- <h2>Login Form</h2> -->
+
+    <div *ngIf="!isSignUp">
+      <form validate="no-validate">
+        <div class="imgcontainer">
+          <img src="../../assets/imgs/logo.png" alt="Avatar" class="avatar">
+        </div>
+      
+        <div class="container">
+          <input type="email" placeholder="Email" name="email" [(ngModel)]="user.email" required>
+      
+          <input type="password" placeholder="Password" [(ngModel)]="user.password" name="psw" required>
+              
+          <button (click)="submitRequest()">Log in</button>
+        </div>
+      </form>
+    
+      <div class="container text-enter" style="background-color:#f1f1f1;">
+        <span class="psw">
+          Don't have an account? 
+          <a (click)="doSignUp(true)">Sign up</a>
+        </span>
+      </div>
+    </div>
+
+    <div *ngIf="isSignUp">
+        <form validate="no-validate"> 
+          <div class="imgcontainer">
+            <img src="../../assets/imgs/logo.png" alt="Avatar" class="avatar">
+          </div>
+      
+          <div class="container">
+            <input type="email" placeholder="Email" name="email" [(ngModel)]="user.email" required>
+
+            <input type="text" placeholder="Name" name="profile_name" [(ngModel)]="user.profile.name" required>
+
+            <input type="tel" placeholder="Mobile Number" name="profile_ph_no" [(ngModel)]="user.profile.phone_number" required>
+
+            <select name="profile_gender" [(ngModel)]="user.profile.gender">
+                <option value="">Gender</option>
+              <option value="female">Female</option>
+              <option value="male">Male</option>
+              <option value="other">Other</option>
+            </select>
+
+            <input type="password" placeholder="Password" name="psw" [(ngModel)]="user.password" required>
+                
+            <button (click)="submitRequest()">Sign up</button>
+          </div>
+        </form>
+      
+        <div class="container text-enter" style="background-color:#f1f1f1;">
+          <span class="psw">
+              Have an account? 
+            <a (click)="doSignUp(false)">Log in</a>
+          </span>
+        </div>
+
+        <div class="spacer"></div>
+      </div>
+
+
+  <!-- <ion-fab top right edge>
       <button ion-fab (click)="submitRequest()"><ion-icon name="checkmark"></ion-icon></button>
   </ion-fab>
   <div *ngIf="!isSignUp">
@@ -66,6 +129,6 @@
           </button>
         </ion-col>
       </ion-row>
-    </div>
+    </div> -->
 
 </ion-content>

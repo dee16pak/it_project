@@ -24,7 +24,7 @@ export class LoginPage {
       profile: {
         name: "",
         phone_number: "",
-        gender: "male",
+        gender: "",
       },
     }
   }

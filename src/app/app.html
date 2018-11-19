@@ -6,16 +6,20 @@
   </ion-header>
 
   <ion-content>
-    <ion-list>
-      <button menuClose ion-item *ngFor="let p of pages" (click)="isLoggedIn() && openPage(p)">
+    <ion-list inset>
+      <ion-item *ngFor="let p of pages" menuClose (click)="isLoggedIn() && openPage(p)">
+        <ion-icon [name]="p.icon" item-start></ion-icon>
         {{p.title}}
-      </button>
-      <button menuClose ion-item (click)="isLoggedIn() && openProfileModal()">
+      </ion-item>
+
+      <ion-item menuClose (click)="isLoggedIn() && openProfileModal()">
+        <ion-icon name="md-person" item-start></ion-icon>
         Profile
-      </button>
-      <button menuClose ion-item (click)="isLoggedIn() && logout()">
-        Logout
-      </button>
+      </ion-item>
+      <ion-item menuClose (click)="isLoggedIn() && logout()">
+        <ion-icon name="md-power" item-start></ion-icon>
+        Log out
+      </ion-item>
     </ion-list>
   </ion-content>
 </ion-menu>
