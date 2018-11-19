@@ -1,17 +1,13 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams,LoadingController } from 'ionic-angular';
-//import { NULL_EXPR } from '@angular/compiler/src/output/output_ast';
-
-import { Modal } from 'ionic-angular';
-import { CheckoutPage } from '../checkout/checkout';
-
-import { ModalController } from 'ionic-angular';
-import { MenuModalPage } from '../menu-modal/menu-modal';
-import { CartdataproviderProvider } from '../../providers/cartdataprovider/cartdataprovider';
-import { ENV } from '../../env';
 import { HttpClient } from '@angular/common/http';
-import { OrderPage } from '../order/order';
+import { Component } from '@angular/core';
+import { IonicPage, LoadingController, Modal, ModalController, NavController, NavParams } from 'ionic-angular';
+import { CartdataproviderProvider } from '../../providers/cartdataprovider/cartdataprovider';
+import { LocationProvider } from '../../providers/location/location';
 import { UserDataProvider } from '../../providers/user-data/user-data';
+import { CheckoutPage } from '../checkout/checkout';
+import { MenuModalPage } from '../menu-modal/menu-modal';
+import { OrderPage } from '../order/order';
+
 
 
 @IonicPage()
@@ -26,7 +22,7 @@ export class MenuPage {
   showError: boolean = false;
   errorMsg: string = '';
   
-  constructor( public user : UserDataProvider, public loadingCtrl: LoadingController, public http: HttpClient,public modalCtrl: ModalController, public navCtrl: NavController, public navParams: NavParams,public cart: CartdataproviderProvider) {
+  constructor(public locProd : LocationProvider , public user : UserDataProvider, public loadingCtrl: LoadingController, public http: HttpClient,public modalCtrl: ModalController, public navCtrl: NavController, public navParams: NavParams,public cart: CartdataproviderProvider) {
   }
   ionViewDidLoad() {
 
@@ -82,7 +78,7 @@ export class MenuPage {
   private async getMenu(venue_name) {
     console.log(venue_name);
     return this.http
-      .get<any[]>(`${ENV.BACKEND_URL}/menu/FindMenu/${venue_name}`)
+      .get<any[]>(`${this.locProd.ip}/menu/FindMenu/${venue_name}`)
       .toPromise();
   }
 

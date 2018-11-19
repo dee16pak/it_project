@@ -31,7 +31,7 @@
     </ion-item>
     <ion-item *ngFor="let venue of venueList" (click)="onVenueClick(venue)">
       <ion-avatar item-start>
-        <img src="{{'http://172.24.218.166:3002/'+venue.image}}">
+        <img src="{{locProd.web_ip+venue.image}}">
       </ion-avatar>
       <h2>{{ venue.name }}, <small>{{ venue.addr }}</small></h2>
       <h3>{{ venue.serve }}</h3>

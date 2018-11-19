@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
 
 import { CartdataproviderProvider } from '../../providers/cartdataprovider/cartdataprovider';
+import { LocationProvider } from '../../providers/location/location';
 //import { listener } from '@angular/core/src/render3/instructions';
 
 
@@ -19,7 +20,7 @@ export class MenuModalPage {
     link: "",
     sub_name: ""
   }
-  constructor(public navCtrl: NavController, private navParams: NavParams, private view: ViewController, private cart:CartdataproviderProvider) {
+  constructor(public locProd : LocationProvider ,public navCtrl: NavController, private navParams: NavParams, private view: ViewController, private cart:CartdataproviderProvider) {
     
   }
 

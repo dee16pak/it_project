@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { ToastController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { ENV } from '../../env';
+import { LocationProvider } from '../location/location';
 
 /*
   Generated class for the UserDataProvider provider.
@@ -18,10 +19,10 @@ export class UserDataProvider {
   public curSelectedVenue = null;
 
   private static SESSION_BASE: string = 'session';
-  constructor(public http: HttpClient, public storage: Storage, public toast: ToastController) { }
+  constructor(public locProd : LocationProvider ,public http: HttpClient, public storage: Storage, public toast: ToastController) { }
 
   makeUrl(uri, session, addQueryString=true, useCurrentSession=false) {
-    let url =  `${ENV.BACKEND_URL}${uri}`;
+    let url =  `${this.locProd.ip}${uri}`;
     if(addQueryString) {
       if(useCurrentSession) session = this.session;
       url += `?email=${session.email}&sid=${session.sid}`;

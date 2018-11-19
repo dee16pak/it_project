@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { ModalController,IonicPage, NavController, LoadingController, NavParams } from 'ionic-angular';
-import { ENV } from '../../env';
 import { HttpClient } from '@angular/common/http';
 import { Modal } from 'ionic-angular';
 import { OrderModalPage } from '../order-modal/order-modal';
 import { UserDataProvider } from '../../providers/user-data/user-data';
+import { LocationProvider } from '../../providers/location/location';
 
 /**
  * Generated class for the OrderPage page.
@@ -23,7 +23,7 @@ export class OrderPage {
   showLoading: boolean = false;
   showError: boolean = false;
   errorMsg: string = '';
-  constructor(public user :UserDataProvider,public modalCtrl: ModalController,public navCtrl: NavController, public loadingCtrl: LoadingController, public http: HttpClient) {
+  constructor(public locProd : LocationProvider ,public user :UserDataProvider,public modalCtrl: ModalController,public navCtrl: NavController, public loadingCtrl: LoadingController, public http: HttpClient) {
   }
   ionViewDidLoad() {
     console.log('ionViewDidLoad OrdersPage');
@@ -31,7 +31,7 @@ export class OrderPage {
   }
 
   private makeUrl(uri, session, addQueryString=true) {
-    let url =  `${ENV.BACKEND_URL}${uri}`;
+    let url =  `${this.locProd.ip}${uri}`;
     if(addQueryString) {
       url += `?email=${session.email}&sid=${session.sid}`;
     }

@@ -13,6 +13,7 @@ export class LocationProvider {
   private lat: number;
   private long: number;
   public ip:string;
+  public web_ip:string;
   constructor(private platform: Platform, public geolocation: Geolocation,) {}
 
   private async refreshLocation() {
@@ -58,15 +59,19 @@ export class LocationProvider {
     if(this.lat>=ENV.ENV_LAT && this.long<=ENV.ENV_LONG){
       console.log("NORTHWEST_URL");
       this.ip = ENV.NORTHWEST_URL;
+      this.web_ip = ENV.WEB_NORTHWEST_URL;
     }else if(this.lat<ENV.ENV_LAT && this.long < ENV.ENV_LONG){
       console.log("SOUTHWEST_URL");
       this.ip = ENV.SOUTHWEST_URL;
+      this.web_ip = ENV.WEB_SOUTHWEST_URL;
     }else if(this.lat>ENV.ENV_LAT && this.long > ENV.ENV_LONG){
       console.log("NORTHEAST_URL");
       this.ip = ENV.NORTHEAST_URL;
+      this.web_ip = ENV.WEB_NORTHEAST_URL;
     }else if(this.lat<ENV.ENV_LAT && this.long > ENV.ENV_LONG){
       console.log("SOUTHEAST_URL");
       this.ip = ENV.SOUTHEAST_URL;
+      this.web_ip = ENV.WEB_SOUTHEAST_URL;
     }
 
   }
