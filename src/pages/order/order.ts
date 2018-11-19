@@ -76,7 +76,7 @@ export class OrderPage {
 
   private async getOrders() {
     return this.http
-      .get<any[]>(this.makeUrl('/order/getOrders/d@gmail.com',null,false))
+      .get<any[]>(this.makeUrl('/order/getOrders/d',null,false))
       .toPromise();
 
     //  return this.http.post(this.makeUrl('/order/orderRegisteration', null, false), {order : orders} ,  {}).toPromise();
@@ -84,7 +84,7 @@ export class OrderPage {
 //model to show single order in details.
   openModal(order) {
       const orderc = order;
-      const modal: Modal = this.modalCtrl.create(OrderModalPage,{ data:orderc });
+      const modal: Modal = this.modalCtrl.create(OrderModalPage,{ data:orderc },{ cssClass: "modal-fullscreen" });
   
       modal.present();
     }
