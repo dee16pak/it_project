@@ -11,7 +11,7 @@
     </button>
     <ion-buttons end style="padding: 2px;">
         <button ion-button clear (click)="gotoOrder()">
-          <ion-icon name="ios-clipboard-outline"></ion-icon>
+          <ion-icon class="refresh-btn-top" name="ios-clipboard-outline"></ion-icon>
         </button>
       </ion-buttons>
     <ion-title>Home</ion-title>
@@ -31,7 +31,7 @@
     </ion-item>
     <ion-item *ngFor="let venue of venueList" (click)="onVenueClick(venue)">
       <ion-avatar item-start>
-        <img [src]="venue.image">
+        <img [src]={{"http://172.24.218.166:3002"+venue.image}}>
       </ion-avatar>
       <h2>{{ venue.name }}, <small>{{ venue.addr }}</small></h2>
       <h3>{{ venue.serve }}</h3>

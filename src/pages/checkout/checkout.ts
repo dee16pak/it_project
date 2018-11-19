@@ -24,6 +24,7 @@ export class CheckoutPage {
   }
 
   checkout() {
+    this.orderFlag =false;
     //   this.payPal.init({
     //       PayPalEnvironmentProduction: '',
     //       PayPalEnvironmentSandbox: 'AZ2vWTozIVbMe1X6I_5buKMzNXlY4coHegGEUP4bGfNXXhTG2KC-QZkzZxjq7mwjB3gGjLs-CvufSqeF'
@@ -82,6 +83,7 @@ export class CheckoutPage {
       })
       .catch(err => {
         this.showAlert('Error','Error while placing your order try again.');
+        this.orderFlag = true;
         console.log(err);
       });
     }

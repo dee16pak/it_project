@@ -4,6 +4,7 @@ import { ENV } from '../../env';
 import { HttpClient } from '@angular/common/http';
 import { Modal } from 'ionic-angular';
 import { OrderModalPage } from '../order-modal/order-modal';
+import { UserDataProvider } from '../../providers/user-data/user-data';
 
 /**
  * Generated class for the OrderPage page.
@@ -22,7 +23,7 @@ export class OrderPage {
   showLoading: boolean = false;
   showError: boolean = false;
   errorMsg: string = '';
-  constructor(public modalCtrl: ModalController,public navCtrl: NavController, public loadingCtrl: LoadingController, public http: HttpClient) {
+  constructor(public user :UserDataProvider,public modalCtrl: ModalController,public navCtrl: NavController, public loadingCtrl: LoadingController, public http: HttpClient) {
   }
   ionViewDidLoad() {
     console.log('ionViewDidLoad OrdersPage');
@@ -76,7 +77,7 @@ export class OrderPage {
 
   private async getOrders() {
     return this.http
-      .get<any[]>(this.makeUrl('/order/getOrders/d@gmail.com',null,false))
+      .get<any[]>(this.makeUrl(`/order/getOrders/${this.user.getUserId()}`,null,false))
       .toPromise();
 
     //  return this.http.post(this.makeUrl('/order/orderRegisteration', null, false), {order : orders} ,  {}).toPromise();
