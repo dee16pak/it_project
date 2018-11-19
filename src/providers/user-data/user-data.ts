@@ -75,11 +75,12 @@ export class UserDataProvider {
   }
 
   async logout() {
-    await this.http.get(this.makeUrl('/user/logout', this.session)).toPromise();
+    //await this.http.get(this.makeUrl('/user/logout', this.session)).toPromise();
 
     this.storage.remove(UserDataProvider.SESSION_BASE);
     this.isLoggedIn = false;
     this.session = undefined;
+    return;
   }
 
   getProfile() {
