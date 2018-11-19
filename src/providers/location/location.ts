@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Geolocation } from '@ionic-native/geolocation';
 import { Platform } from 'ionic-angular';
+import { ENV } from '../../env';
 /*
   Generated class for the LocationProvider provider.
 
@@ -11,8 +12,8 @@ import { Platform } from 'ionic-angular';
 export class LocationProvider {
   private lat: number;
   private long: number;
-
-  constructor(private platform: Platform, public geolocation: Geolocation) {}
+  public ip:string;
+  constructor(private platform: Platform, public geolocation: Geolocation,) {}
 
   private async refreshLocation() {
     if(this.platform.is('core')) {//Dummy value for debugging on desktop browser.
@@ -53,5 +54,20 @@ export class LocationProvider {
       throw new Error(err);
     }
   }
+  findIp(){
+    if(this.lat>=ENV.ENV_LAT && this.long<=ENV.ENV_LONG){
+      console.log("NORTHWEST_URL");
+      this.ip = ENV.NORTHWEST_URL;
+    }else if(this.lat<ENV.ENV_LAT && this.long < ENV.ENV_LONG){
+      console.log("SOUTHWEST_URL");
+      this.ip = ENV.SOUTHWEST_URL;
+    }else if(this.lat>ENV.ENV_LAT && this.long > ENV.ENV_LONG){
+      console.log("NORTHEAST_URL");
+      this.ip = ENV.NORTHEAST_URL;
+    }else if(this.lat<ENV.ENV_LAT && this.long > ENV.ENV_LONG){
+      console.log("SOUTHEAST_URL");
+      this.ip = ENV.SOUTHEAST_URL;
+    }
 
+  }
 }

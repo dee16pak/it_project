@@ -1,4 +1,9 @@
 export const ENV = {
-    BACKEND_URL: "http://172.24.218.166:3000",
+    ENV_LAT: 22.849075,
+    ENV_LONG:78.129648,
+    NORTHEAST_URL: "http://172.24.218.166:3000",
+    SOUTHEAST_URL: "http://172.24.218.166:3000",
+    NORTHWEST_URL: "http://172.24.218.166:3000",
+    SOUTHWEST_URL: "http://172.24.218.166:3000",
     LOCAL_STORAGE_NAME: "__it_project_db"
 };
