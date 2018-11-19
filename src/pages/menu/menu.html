@@ -33,9 +33,9 @@
   <ion-list *ngIf="!showError && !showLoading && cart.groups.length>0">
     <ion-item *ngFor="let group of cart.groups ;let i =index"  class="item-stable">
 
-      <button ion-item (click)="toggleGroup(i)" detail-none>
-        <ion-icon item-right name="md-arrow-dropleft" *ngIf="!group.check"></ion-icon>
-        <ion-icon item-right name="md-arrow-dropdown" *ngIf="group.check"></ion-icon>
+      <button ion-item class="item-group" (click)="toggleGroup(i)" detail-none>
+        <!-- <ion-icon item-right name="md-arrow-dropleft" *ngIf="!group.check"></ion-icon>
+        <ion-icon item-right name="md-arrow-dropdown" *ngIf="group.check"></ion-icon> -->
         &nbsp;
         {{group.group_name}}
       </button>
@@ -49,20 +49,22 @@
                 <ion-col col-2>
 
                   <ion-avatar item-start>
-                    <img [src]="">
+                    <img src="{{ 'http://172.24.218.166:3002/' + item.link }}">
                   </ion-avatar>
                 </ion-col>
                 <ion-col col-5>
-                  {{ item.item_name }} &nbsp;&nbsp;<span style="font-size:11px;">( {{item.item_sub_name}}
-                    )</span>
+                  {{ item.item_name }}
+                  <p style="font-size:11px;">({{item.item_sub_name}})</p>
+                  
                 </ion-col>
                 <ion-col style="text-align: right;" col-2>{{item.price}}
                 </ion-col>
                 <ion-col col-3>
-
-                  <ion-icon ios="ios-basket" md="md-basket" style="float:right; color:red;">{{item.qty}}</ion-icon>
-
-
+                  <!-- <span style="float:right; color: #616161;">{{item.qty}}</span> -->
+                  <ion-icon ios="ios-basket" md="md-basket" style="float:right; color: #616161; font-size: 16px;">
+                    <sup style="border-radius: 12px;font-size: 14px; background-color: #4FC3F7;color: white;padding: 7px;">{{item.qty}}</sup>
+                  </ion-icon>
+                  
                 </ion-col>
 
 
@@ -90,5 +92,5 @@
 </ion-content>
 
 <ion-footer *ngIf="cart.checkt">
-  <button (click)="gotoCheckout()" ion-button color="secondary" full bottom style="margin: 0px;height: 48px;">Checkout</button>
+  <button (click)="gotoCheckout()" ion-button full bottom style="margin: 0px;height: 48px; background-color:#3897f0">Checkout</button>
 </ion-footer>

@@ -3,11 +3,11 @@ page-order {
         font-size: 25px;
     }
     .order-green button {
-        background-color: #4cd561;
-        color: white;
+        border-bottom: 5px solid #4CAF50 !important;
+        color: #263238;
     }
     .order-red button {
-        background-color: #ff837f;
-        color: white;
+        border-bottom: 5px solid #b71c1c !important;
+        color: #263238;
     }
 }

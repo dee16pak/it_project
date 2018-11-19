@@ -16,6 +16,8 @@ export class MenuModalPage {
  itemno;
   data={
     quantity:0,
+    link: "",
+    sub_name: ""
   }
   constructor(public navCtrl: NavController, private navParams: NavParams, private view: ViewController, private cart:CartdataproviderProvider) {
     
@@ -37,6 +39,8 @@ export class MenuModalPage {
   ionViewDidLoad() {
     this.itemno = this.cart.groups[this.cart.pos.i].itemlist[this.cart.pos.j].item_name;
     this.data.quantity = this.cart.groups[this.cart.pos.i].itemlist[this.cart.pos.j].qty;
+    this.data.link = this.cart.groups[this.cart.pos.i].itemlist[this.cart.pos.j].link;
+    this.data.sub_name = this.cart.groups[this.cart.pos.i].itemlist[this.cart.pos.j].item_sub_name;
   }
 
   add(){

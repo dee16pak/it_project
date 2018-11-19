@@ -24,7 +24,10 @@ order:any[] = [];
     this.order = this.navParams.get('data');
     this.order['orderno'] = this.order['orderno'].split('-')[0];
     this.order['placetime'] = this.order['placetime'].split('.')[0];
+    
+    this.order['time'] = this.order['placetime'].split('T')[0] + ' ' + this.order['placetime'].split('T')[1];
     console.log(this.order['orderno'].split('-')[0]);
+    console.log(this.order);
   }
   closeModal(){
     console.log("close");

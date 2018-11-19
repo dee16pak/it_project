@@ -85,7 +85,7 @@ export class OrderPage {
 //model to show single order in details.
   openModal(order) {
       const orderc = order;
-      const modal: Modal = this.modalCtrl.create(OrderModalPage,{ data:orderc });
+      const modal: Modal = this.modalCtrl.create(OrderModalPage,{ data:orderc },{ cssClass: "modal-fullscreen" });
   
       modal.present();
     }
