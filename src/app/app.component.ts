@@ -35,7 +35,7 @@ export class MyApp {
     this.platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
-      this.splashScreen.show();
+      //this.splashScreen.show();
       this.userDataProvider.checkLogin().then(() => {
         this.nav.setRoot(VenuelistPage);
         //this.nav.setRoot(HomePage);
@@ -50,7 +50,7 @@ export class MyApp {
           this.splashScreen.hide();
         console.log("init logged in already");
       }).catch(err => {
-        this.statusBar.styleDefault();
+        this.statusBar.show();
         this.splashScreen.hide();
         this.nav.setRoot(LoginPage);
         console.log("init not logged in already");
