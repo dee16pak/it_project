@@ -1,0 +1,52 @@
+<!--
+  Generated template for the VenuelistPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-buttons end style="padding: 2px;">
+        <button ion-button clear (click)="gotoOrder()">
+          <ion-icon class="refresh-btn-top" name="ios-clipboard-outline"></ion-icon>
+        </button>
+      </ion-buttons>
+    <ion-title>Home</ion-title>
+    <ion-buttons end>
+      <button ion-button clear (click)="refreshAndGetShit()">
+        <ion-icon class="refresh-btn-top" name="refresh"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content no-padding>
+  <ion-list *ngIf="!showError && !showLoading && venueList.length > 0">
+    <ion-item text-center class="first-item">
+      {{ venueList.length || 'No' }} Options Available
+    </ion-item>
+    <ion-item *ngFor="let venue of venueList" (click)="onVenueClick(venue)">
+      <ion-avatar item-start>
+        <img src="{{locProd.web_ip+venue.image}}">
+      </ion-avatar>
+      <h2>{{ venue.name }}, <small>{{ venue.addr }}</small></h2>
+      <h3>{{ venue.serve }}</h3>
+    </ion-item>
+  </ion-list>
+
+  <div class="no-list" text-center *ngIf="!showError && !showLoading && venueList.length == 0">
+    <ion-icon name="ios-warning-outline"></ion-icon>
+    <h5>No Venues Found</h5>
+    <p>There are no venues listed in your area yet...</p>
+  </div>
+
+  <div class="no-list" text-center *ngIf="!showLoading && showError">
+      <ion-icon name="ios-warning-outline"></ion-icon>
+      <h5>Error</h5>
+      <p>{{ errorMsg }}</p>
+    </div>
+</ion-content>

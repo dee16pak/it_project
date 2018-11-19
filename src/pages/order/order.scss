@@ -1,0 +1,25 @@
+page-order {
+    .refresh-btn-top{
+        font-size: 25px;
+    }
+    .order-green button {
+        border-bottom: 5px solid #4CAF50 !important;
+        color: #263238;
+    }
+    .order-red button {
+        border-bottom: 5px solid #b71c1c !important;
+        color: #263238;
+    }
+    .no-list{
+        color: #757575;
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+        height: 80%;
+        flex-direction: column;
+
+        ion-icon {
+            font-size: 100px;
+        }
+    }
+}

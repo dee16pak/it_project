@@ -1,0 +1,70 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Orders</ion-title>
+    <!-- <ion-buttons end>
+      <button ion-button clear>
+        <ion-icon ios="ios-cart" md="md-cart" large></ion-icon>
+       
+      </button>
+    </ion-buttons>  -->
+    <ion-buttons end>
+      <button ion-button clear (click)="refreshAndGetShit()">
+        <ion-icon class="refresh-btn-top" name="refresh"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content no-padding>
+  <ion-list *ngIf="!showError && !showLoading && orderList.length > 0">
+    <!--ng-style="{ 'background' : (order.status == 1) ? '#92ec84' : '#f8c0c0' }"-->
+
+    <ion-card *ngFor="let order of orderList" [ngClass]="{'order-green': order.status==1 , 'order-red': order.status==0}"
+      no-padding>
+
+      <button ion-item (click)="openModal(order)">
+
+        <ion-card-header>
+          <div style="font-size:18px; float: left;color: #263238">{{order.venue_name}} </div>
+          <div style="text-align: right;font-size:16px ;float: right;color: #263238">Order No.:<b>{{ order.orderno.split("-")[0] }}</b></div>
+
+        </ion-card-header>
+        <div *ngIf="order.status==0">
+          <ion-card-content no-padding *ngFor="let item of order.orderitem">
+            <ion-grid>
+              <ion-row justify-content-start align-items-center>
+                <ion-col col-7>
+                  {{ item.item_name }} &nbsp;&nbsp;<span style="font-size:11px;">( {{item.item_sub_name}}
+                    )</span>
+                </ion-col>
+                <ion-col col-3>
+                  {{item.qty}}
+                </ion-col>
+                <ion-col style="text-align: right;" col-2>{{item.price*item.qty}}
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-card-content>
+        </div>
+        <ion-card-content>
+
+          <div style="font-size:16px; float: left;">Total</div>
+          <div style="text-align: right;font-size:17px ;float: right"><b>{{ order.bill }}</b></div>
+        </ion-card-content>
+      </button>
+    </ion-card>
+
+
+  </ion-list>
+  <div class="no-list" text-center *ngIf="!showError && !showLoading && orderList.length == 0">
+    <ion-icon name="ios-warning-outline"></ion-icon>
+    <h5>No Orders Found</h5>
+    <p>There are no old orders under your name</p>
+  </div>
+  <div class="no-list" text-center *ngIf="!showLoading && showError">
+    <ion-icon name="ios-warning-outline"></ion-icon>
+    <h5>Error</h5>
+    <p>{{ errorMsg }}</p>
+  </div>
+
+</ion-content>

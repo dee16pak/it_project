@@ -1,0 +1,48 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>{{order.venue_name}}</ion-title>
+    <ion-buttons end>
+      <button (click)="closeModal()" ion-button clear>
+        <ion-icon  style="font-size: x-large;" ios="ios-close" md="md-close" large></ion-icon></button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+<ion-card style="padding-bottom: 10px;">
+  <ion-card-header style="border-bottom: 1px solid #E0E0E0;">
+    <div style="font-size:18px; float: left;">Order No.: <b>{{ order.orderno }}</b></div>
+    <br/>
+    <div style="font-size:14px; float: left; padding-top: 10px;">Order time.: <b>{{ order.time }}</b></div>
+    <!-- <div style="text-align: right;font-size:16px ;float: right">Order No.:<b>{{ order.orderno }}</b></div> --> 
+  </ion-card-header>
+  <ion-card-content no-padding *ngFor="let item of order.orderitem">
+    <ion-grid>
+      <ion-row justify-content-start align-items-center>
+        <ion-col col-7>
+          {{ item.item_name }} &nbsp;&nbsp;<span style="font-size:11px;">( {{item.item_sub_name}}
+            )</span>
+        </ion-col>
+        <ion-col col-3>
+          {{item.qty}}
+
+        </ion-col>
+        <ion-col style="text-align: right;" col-2>{{item.price*item.qty}}
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card-content>
+
+  <ion-card-content>
+
+    <div style="font-size:16px; float: left;">Total</div>
+    <div style="text-align: right;font-size:17px ;float: right"><b>{{ order.bill }}</b></div>
+  </ion-card-content>
+
+  </ion-card>
+
+
+</ion-content>

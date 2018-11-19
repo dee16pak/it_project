@@ -1,0 +1,40 @@
+<!--
+  Generated template for the MenuModalPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+
+<ion-header class="head">
+
+  <ion-navbar>
+    <ion-title>{{itemno}} <small>({{data.sub_name}})</small></ion-title>
+    <ion-buttons end>
+        <button (click)="closeModal()" ion-button clear><ion-icon  style="font-size: x-large;" ios="ios-close" md="md-close" large></ion-icon></button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding class="mypage" style="padding: 0px;">
+  <img src="{{ locProd.web_ip + data.link }}" style="max-height: 150px; width: 100%"/>
+  <div style="font-size: x-large; position:absolute; bottom: 20px; width:90%">
+      Select Quantity &nbsp;&nbsp;
+      <span style="float: right">
+        <ion-icon ios="ios-remove" md="md-remove" tappable style="color:red;zoom:1.1" (click)="subtract()"></ion-icon>
+        &nbsp;&nbsp;{{data.quantity}}&nbsp;&nbsp;
+        <ion-icon ios="ios-add" md="md-add" tappable style="color:green;zoom:1.1" (click)="add()"></ion-icon>
+      </span>
+  </div>
+ 
+    
+</ion-content>
+<ion-footer>
+    <!-- <ion-buttons> -->
+        
+      <button (click)="addtocart()" ion-button full bottom style="background-color: #3897f0; margin: 0px;height: 48px;">Add to Cart</button>
+      
+    <!-- </ion-buttons> -->
+</ion-footer>
+
