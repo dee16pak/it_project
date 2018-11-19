@@ -36,7 +36,8 @@ export class VenuelistPage {
   ionViewDidLoad() {
     if(this.userProd.isUserLoggedIn() == false) return;
     console.log('ionViewDidLoad VenuelistPage');
-    this.refreshAndGetShit();
+    this.showLoading = true;
+    this.getVenues();
   }
 
   async refreshAndGetShit() {
@@ -53,9 +54,15 @@ export class VenuelistPage {
     }
 
     loading.dismiss();
-    loading = this.showLoader('Fetching Venues near your Location');
+    
+    return this.getVenues();
 
+  }
+  async getVenues(){
+
+    let loading = this.showLoader('Fetching Venues near your Location');
     let list;
+    let loc= await this.locProd.get();
     try {
       list = await this.getVenueNearLocation(loc);
     } catch(err) {

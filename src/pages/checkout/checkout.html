@@ -3,7 +3,7 @@
     <ion-title>Cart</ion-title>
     <ion-buttons end style="padding: 2px;">
       <button ion-button clear (click)="gotoOrder()">
-        <ion-icon name="ios-clipboard-outline"></ion-icon>
+        <ion-icon class="refresh-btn-top" name="ios-clipboard-outline"></ion-icon>
       </button>
     </ion-buttons>
 
@@ -60,8 +60,7 @@
   </ion-footer>
   <div class="no-list" text-center *ngIf="cartList.length == 0">
     <ion-icon name="ios-warning-outline"></ion-icon>
-    <h5>No Item added to Cart</h5>
-    <p>There are no </p>
-  </div>
+    <h5>Cart is empty</h5>
+   </div>
  
 </ion-content>
