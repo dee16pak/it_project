@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Geolocation } from '@ionic-native/geolocation';
-import { Platform } from 'ionic-angular';
+import { Platform, ToastController, AlertController } from 'ionic-angular';
 import { ENV } from '../../env';
 /*
   Generated class for the LocationProvider provider.
@@ -14,19 +14,71 @@ export class LocationProvider {
   private long: number;
   public ip:string;
   public web_ip:string;
-  constructor(private platform: Platform, public geolocation: Geolocation,) {}
+
+  public promptPromise: any;
+
+  constructor(private platform: Platform, public geolocation: Geolocation, public toastCtrl: ToastController, public alertCtrl: AlertController) {}
 
   private async refreshLocation() {
     if(this.platform.is('core')) {//Dummy value for debugging on desktop browser.
-      this.lat = 26.5064511;
-      this.long = 80.2261798;
+      // this.lat = 26.5064511;
+      // this.long = 80.2261798;
       //await new Promise((resolve, reject) => setTimeout(reject, 2000));
-      await new Promise(resolve => setTimeout(resolve, 2000));
+      //await new Promise(resolve => setTimeout(resolve, 2000));
+      await new Promise((resolve, reject) => {
+        this.promptPromise = {
+          resolve,
+          reject
+        };
+        this.getTestLatLong();
+      });
     } else {
       const resp = await this.geolocation.getCurrentPosition();
       this.lat = resp.coords.latitude;
       this.long = resp.coords.longitude;
     }
+    console.log("find ip");
+      this.findIp();
+      this.toastCtrl.create({
+        message: `Selected IP: ${this.ip} # ${this.web_ip}`,
+        duration: 3000,
+        position: 'bottom'
+      }).present();
+  }
+
+  private getTestLatLong() {
+    this.alertCtrl.create({
+      title: 'Testing',
+      message: "Enter Lat, Long for Testing.",
+      inputs: [
+        {
+          name: 'Lat',
+          placeholder: '26.5064511'
+        },
+        {
+          name: 'Long',
+          placeholder: '80.2261798'
+        }
+      ],
+      buttons: [
+        {
+          text: 'Cancel',
+          handler: data => {
+            console.log('Cancel clicked');
+            this.promptPromise.reject();
+          }
+        },
+        {
+          text: 'Save',
+          handler: data => {
+            this.lat = data.Lat;
+            this.long = data.Long;
+            console.log(data);
+            this.promptPromise.resolve();
+          }
+        }
+      ]
+    }).present();
   }
 
   private async _get() {

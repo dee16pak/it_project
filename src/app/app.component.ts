@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { Nav, Platform, ToastController, ModalController } from 'ionic-angular';
+import { Nav, Platform, ToastController, ModalController, LoadingController, AlertController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
@@ -9,6 +9,7 @@ import { LoginPage } from '../pages/login/login';
 import { UserProfileModalPage } from '../pages/user-profile-modal/user-profile-modal';
 
 import { UserDataProvider } from '../providers/user-data/user-data';
+import { LocationProvider } from '../providers/location/location';
 
 @Component({
   templateUrl: 'app.html'
@@ -16,11 +17,11 @@ import { UserDataProvider } from '../providers/user-data/user-data';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = LoginPage;
+  rootPage: any = null;
 
   pages: Array<{title: string, component: any, icon: string}>;
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, public userDataProvider: UserDataProvider, public toastCtrl: ToastController, public modalCtrl: ModalController) {
+  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, public userDataProvider: UserDataProvider, public toastCtrl: ToastController, public modalCtrl: ModalController, public locProd: LocationProvider, public loadingCtrl: LoadingController, public alertCtrl: AlertController) {
     this.initializeApp();
 
     // used for an example of ngFor and navigation
@@ -33,28 +34,62 @@ export class MyApp {
 
   initializeApp() {
     this.platform.ready().then(() => {
-      // Okay, so the platform is ready and our plugins are available.
-      // Here you can do any higher level native things you might need.
-      //this.splashScreen.show();
-      this.userDataProvider.checkLogin().then(() => {
-        this.nav.setRoot(VenuelistPage);
-        //this.nav.setRoot(HomePage);
-         // this.statusBar.styleDefault();
-         // let status bar overlay webview
-       //   this.statusBar.overlaysWebView(true);
+      this.getLocationBeforeLoginCheck();
+    });
+  }
 
-         // this.statusBar.backgroundColorByHexString('#ffffff');
-         //this.statusBar.styleDefault();
-          this.statusBar.show();
-          console.log("is status showing"+this.statusBar.isVisible);
-          this.splashScreen.hide();
-        console.log("init logged in already");
-      }).catch(err => {
-        this.statusBar.show();
-        this.splashScreen.hide();
-        this.nav.setRoot(LoginPage);
-        console.log("init not logged in already");
-      });
+  getLocationBeforeLoginCheck() {
+    let loading = this.showLoader('Fetching your Location');
+    return this.locProd.refreshAndGet()
+    .then(() => {
+      loading.dismiss();
+      this.checkLogin();
+    })
+    .catch(err => {
+      this.alertCtrl.create({
+        title: 'Error!',
+        subTitle: 'App needs your location to work! Please make sure your have GPS enabled!!',
+        buttons: [
+          {
+            text: 'Exit App',
+            handler: () => {
+              console.log('Disagree clicked');
+              this.platform.exitApp(); // stops the app
+              window.close();
+            }
+          },
+          {
+            text: 'Ok',
+            handler: () => {
+              this.getLocationBeforeLoginCheck();
+              console.log('Agree clicked');
+            }
+          }
+        ]
+      }).present();
+      loading.dismiss();
+    });
+  }
+
+  private showLoader(content) {
+    let loading = this.loadingCtrl.create({
+      content
+    });
+    loading.present();
+    return loading;
+  }
+
+  checkLogin() {
+    this.userDataProvider.checkLogin().then(() => {
+      this.nav.setRoot(VenuelistPage);
+      this.statusBar.show();
+      this.splashScreen.hide();
+      console.log("init logged in already");
+    }).catch(err => {
+      this.statusBar.show();
+      this.splashScreen.hide();
+      this.nav.setRoot(LoginPage);
+      console.log("init not logged in already");
     });
   }
 
