@@ -14,7 +14,7 @@ import { MenuPage } from '../menu/menu';
  * Ionic pages and navigation.
  */
 
-const SEARCH_RADIUS_IN_MILES = 0.3106856;//0.5KM in miles
+const SEARCH_RADIUS_IN_MILES = 1.3106856;//0.5KM in miles
 
 @IonicPage()
 @Component({
